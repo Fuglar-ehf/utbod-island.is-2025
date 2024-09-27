@@ -22,6 +22,10 @@ import {
   InstitutionNationalIds,
   Application,
   ApplicationConfigurations,
+  PassportsApi,
+  ThjodskraImagesApi,
+  ThjodskraSignatureApi,
+  ThjodskraImageApi,
 } from '@island.is/application/types'
 import { FeatureFlagClient } from '@island.is/feature-flags'
 import {
@@ -131,6 +135,7 @@ const template: ApplicationTemplate<
               api: [
                 NationalRegistryUserApi,
                 TeachersApi,
+                PassportsApi,
                 UserProfileApi,
                 SyslumadurPaymentCatalogApi,
                 GlassesCheckApi,
@@ -142,6 +147,9 @@ const template: ApplicationTemplate<
                 }),
                 DrivingAssessmentApi,
                 QualityPhotoApi,
+                ThjodskraImagesApi,
+                ThjodskraImageApi,
+                ThjodskraSignatureApi,
                 ExistingApplicationApi.configure({
                   params: {
                     states: [States.PAYMENT, States.DRAFT],
