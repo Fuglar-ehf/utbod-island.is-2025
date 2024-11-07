@@ -65,6 +65,7 @@ import { TenantsModule } from './v2/tenants/tenants.module'
         XRoadConfig,
         IdsClientConfig,
         SyslumennClientConfig,
+        DelegationApiUserSystemNotificationConfig,
       ],
       envFilePath: ['.env', '.env.secret'],
     }),
