@@ -228,7 +228,7 @@ const OrganizationHomePage: Screen<HomeProps> = ({
   )
 }
 
-interface HomeProps {
+export interface HomeProps {
   organizationPage?: Query['getOrganizationPage']
   organization?: Query['getOrganization']
   namespace: Record<string, string>
@@ -241,6 +241,7 @@ const Home: Screen<HomeProps> = ({
 }) => {
   const isLandingPage =
     !organizationPage && !!organization && organization?.hasALandingPage
+
   if (isLandingPage)
     return (
       <LandingPage
