@@ -17,6 +17,7 @@ import {
   ContentLanguage,
   CustomPageUniqueIdentifier,
   Grant,
+  GrantStatus,
   Query,
   QueryGetSingleGrantArgs,
 } from '@island.is/web/graphql/schema'
@@ -104,7 +105,9 @@ const GrantSinglePage: CustomScreen<GrantSingleProps> = ({ grant, locale }) => {
             heading={grant.name}
             backgroundColor="blue"
             cta={{
-              disabled: !grant.applicationUrl?.slug,
+              disabled:
+                !grant.applicationUrl?.slug ||
+                grant.status === GrantStatus.Closed,
               label: formatMessage(m.single.apply),
               onClick: () => router.push(grant.applicationUrl?.slug ?? ''),
               icon: 'open',
