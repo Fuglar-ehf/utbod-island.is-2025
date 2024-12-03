@@ -12,6 +12,19 @@ import { GenericTag, GrantStatus } from '@island.is/web/graphql/schema'
 import { m } from '../messages'
 import { SearchState } from './SearchResults'
 
+const sortGenericTag = (dataArray: Array<GenericTag>) => {
+  return dataArray.sort((t1, t2) => {
+    if (t1.title > t2.title) {
+      return 1
+    }
+    if (t1.title < t2.title) {
+      return -1
+    }
+
+    return 0
+  })
+}
+
 interface Props {
   onSearchUpdate: (categoryId: keyof SearchState, value: unknown) => void
   onReset: () => void
@@ -30,12 +43,12 @@ export const GrantsSearchResultsFilter = ({
   variant = 'default',
 }: Props) => {
   const { formatMessage } = useIntl()
-  const categoryFilters = tags?.filter(
-    (t) => t.genericTagGroup?.slug === 'grant-category',
+  const categoryFilters = sortGenericTag(
+    tags?.filter((t) => t.genericTagGroup?.slug === 'grant-category'),
   )
 
-  const typeFilters = tags?.filter(
-    (t) => t.genericTagGroup?.slug === 'grant-type',
+  const typeFilters = sortGenericTag(
+    tags?.filter((t) => t.genericTagGroup?.slug === 'grant-type'),
   )
 
   return (

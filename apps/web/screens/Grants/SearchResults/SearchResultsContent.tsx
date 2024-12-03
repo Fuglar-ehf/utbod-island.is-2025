@@ -52,8 +52,16 @@ export const SearchResultsContent = ({ grants, subheader, locale }: Props) => {
                     subEyebrow={grant.fund?.parentOrganization?.title}
                     title={grant.name ?? ''}
                     text={grant.description ?? ''}
-                    logo={grant.fund?.parentOrganization?.logo?.url ?? ''}
-                    logoAlt={grant.fund?.parentOrganization?.logo?.title ?? ''}
+                    logo={
+                      grant.fund?.featuredImage?.url ??
+                      grant.fund?.parentOrganization.logo?.url ??
+                      ''
+                    }
+                    logoAlt={
+                      grant.fund?.featuredImage?.title ??
+                      grant.fund?.parentOrganization?.logo?.title ??
+                      ''
+                    }
                     tag={
                       grant.status
                         ? generateStatusTag(grant.status, formatMessage)
