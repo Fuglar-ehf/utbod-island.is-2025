@@ -33,16 +33,17 @@ COPY package.json yarn.lock .yarnrc.yml ./
 COPY apps/native/app/package.json ./apps/native/app/
 COPY .yarn/ ./.yarn
 
-RUN CI=true yarn install --immutable && \
-  # Don't store the cache in the builder image
-  yarn cache clean
+# hadolint ignore=DL3060
+RUN --mount=type=cache,target=.yarn/cache \
+  # Cache-mount the relatively frequently changing caches
+  CI=true yarn install --immutable
 
 
 # Image with source code
 FROM deps AS src
 
 # image with the source code
-COPY . .
+COPY . ./
 
 
 # Build stage
@@ -70,8 +71,6 @@ ARG APP_DIST_HOME
 ENV APP=${APP}
 ENV NODE_ENV=production
 
-WORKDIR /webapp
-
 # Adding user for running the app
 RUN addgroup runners && \
   adduser --disabled-password runner --ingroup runners
@@ -93,6 +92,7 @@ FROM base-node AS output-base
 
 
 FROM base-node-with-pg AS output-express
+WORKDIR /webapp
 
 # Stage-specific ARGs
 ARG APP_DIST_HOME
@@ -100,7 +100,8 @@ ARG GIT_BRANCH
 ARG GIT_COMMIT_SHA
 ARG GIT_REPOSITORY_URL
 
-COPY --from=builder /dist /webapp/
+COPY --from=builder /dist ./
+RUN ls -lah .
 
 ENV GIT_BRANCH=${GIT_BRANCH} GIT_COMMIT_SHA=${GIT_COMMIT_SHA} GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
 ENV DD_GIT_BRANCH=${GIT_BRANCH} DD_GIT_COMMIT_SHA=${GIT_COMMIT_SHA} DD_GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
@@ -110,6 +111,7 @@ ENTRYPOINT [ "node", "--no-experimental-fetch", "main.js" ]
 
 
 FROM base-node-with-pg AS output-next
+WORKDIR /webapp
 
 # Stage-specific ARGs
 ARG APP
@@ -121,8 +123,9 @@ ARG GIT_REPOSITORY_URL
 ENV PORT=4200
 
 # TODO: smallify
-COPY --from=deps /build/node_modules /webapp/node_modules
-COPY --from=builder /dist /webapp/
+COPY --from=deps /build/node_modules ./
+COPY --from=builder /dist ./
+RUN ls -lah .
 
 ENV GIT_BRANCH=${GIT_BRANCH} GIT_COMMIT_SHA=${GIT_COMMIT_SHA} GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
 ENV DD_GIT_BRANCH=${GIT_BRANCH} DD_GIT_COMMIT_SHA=${GIT_COMMIT_SHA} DD_GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
@@ -147,11 +150,13 @@ RUN apk add --no-cache bash nodejs && \
 
 
 FROM base-static AS output-static
+WORKDIR /usr/share/nginx/html
 
 COPY scripts/dockerfile-assets/nginx/* /etc/nginx/templates
 COPY scripts/dockerfile-assets/bash/extract-environment.sh /docker-entrypoint.d
 COPY scripts/dockerfile-assets/bash/extract-environment.js /docker-entrypoint.d
-COPY --from=builder /dist /usr/share/nginx/html
+COPY --from=builder /dist ./
+RUN ls -lah .
 
 ENV GIT_BRANCH=${GIT_BRANCH} GIT_COMMIT_SHA=${GIT_COMMIT_SHA} GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
 ENV DD_GIT_BRANCH=${GIT_BRANCH} DD_GIT_COMMIT_SHA=${GIT_COMMIT_SHA} DD_GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
@@ -178,8 +183,10 @@ RUN echo 'module.exports = {};' > jest.config.js
 
 
 FROM base-jest AS output-jest
+WORKDIR /webapp
 
-COPY --from=builder /dist /webapp/
+COPY --from=builder /dist ./
+RUN ls -lah .
 
 USER runner
 
@@ -201,6 +208,7 @@ RUN apt-get update -y && \
 
 
 FROM playwright-base AS output-playwright
+WORKDIR /testing
 
 # Stage-specific ARGs
 ARG APP
@@ -211,8 +219,6 @@ ARG GIT_BRANCH
 ARG GIT_COMMIT_SHA
 ARG GIT_REPOSITORY_URL
 
-WORKDIR /testing
-
 COPY .yarnrc.yml ${APP_HOME}/package.json ./
 COPY .yarn/releases ./.yarn/releases
 
@@ -221,7 +227,7 @@ RUN yarn install && \
   yarn cache clean
 
 COPY --from=builder /dist ./
-COPY --chmod=0755 ${APP_HOME}/entrypoint.sh .
+COPY --chmod=0755 ${APP_HOME}/entrypoint.sh ./
 
 ENV GIT_BRANCH=${GIT_BRANCH} GIT_COMMIT_SHA=${GIT_COMMIT_SHA} GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
 ENV DD_GIT_BRANCH=${GIT_BRANCH} DD_GIT_COMMIT_SHA=${GIT_COMMIT_SHA} DD_GIT_REPOSITORY_URL=${GIT_REPOSITORY_URL}
@@ -232,5 +238,6 @@ ENTRYPOINT [ "./entrypoint.sh" ]
 
 
 FROM base-node AS output-native
+WORKDIR /native
 
 RUN echo "not-implemented"

@@ -12,12 +12,14 @@ export async function renderLocalServices({
   json = false,
   dryRun = false,
   noUpdateSecrets = false,
+  docker = false,
 }: {
   services: string[]
   print?: boolean
   json?: boolean
   dryRun?: boolean
   noUpdateSecrets?: boolean
+  docker?: boolean
 }): Promise<LocalrunValueFile> {
   logger.debug('renderLocalServices', {
     services,
@@ -40,6 +42,38 @@ export async function renderLocalServices({
     { dryRun, noUpdateSecrets },
   )
 
+  if (docker) {
+    const targetString = 'docker-*'
+    const targets = ...
+    logger.info('Target:', { targetString, target })
+
+    // Ensure the target name starts with "docker-"
+    const type = target.target.startsWith('docker-')
+      ? target.target.replace('docker-', '')
+      : undefined
+
+    if (!type) {
+      throw new Error(
+        `Invalid target: ${targetString}. Expected a target starting with "docker-".`,
+      )
+    }
+    Object.entries(renderedLocalServices.services)
+      .map(([k, v]): typeof v => ({
+        ...v,
+        commands: [
+          [
+            `docker buildx build`,
+            `--file="$PWD/scripts/ci/Dockerfile"`,
+            `--target=output-${type}`,
+            `--load`,
+            `--build-arg=APP=${k}`,
+            `--tag=${k}:local`,
+          ].join(' '),
+          `dokcer run --rm -it --name=${k} --env-file=.env.${k} ${k}:local`,
+        ],
+      }))
+      .map(console.error)
+  }
   if (print) {
     const commandedServices = Object.entries(
       renderedLocalServices.services,
@@ -65,6 +99,7 @@ export async function runLocalServices(
     json = false,
     noUpdateSecrets = false,
     startProxies = false,
+    docker = false,
   }: {
     dryRun?: boolean
     neverFail?: boolean
@@ -72,6 +107,7 @@ export async function runLocalServices(
     json?: boolean
     noUpdateSecrets?: boolean
     startProxies?: boolean
+    docker?: boolean
   } = {},
 ) {
   logger.debug('runLocalServices', { services, dependencies })
@@ -85,6 +121,7 @@ export async function runLocalServices(
     json,
     dryRun,
     noUpdateSecrets,
+    docker,
   })
 
   // Verify that all dependencies exist in the rendered dependency list
