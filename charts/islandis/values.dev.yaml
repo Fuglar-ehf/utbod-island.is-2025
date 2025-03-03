@@ -39,6 +39,7 @@ air-discount-scheme-api:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/air-discount-scheme-api'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -127,6 +128,7 @@ air-discount-scheme-backend:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/air-discount-scheme-backend'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -227,6 +229,7 @@ air-discount-scheme-web:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/air-discount-scheme-web'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -444,6 +447,7 @@ api:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/api'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -723,6 +727,7 @@ application-system-api:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/application-system-api'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -891,6 +896,7 @@ application-system-api-worker:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/application-system-api'
+    tag: 'latest'
   namespace: 'application-system'
   podDisruptionBudget:
     maxUnavailable: 1
@@ -966,6 +972,7 @@ application-system-form:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/application-system-form'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1033,6 +1040,7 @@ consultation-portal:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/consultation-portal'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1093,6 +1101,7 @@ contentful-apps:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/contentful-apps'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1156,6 +1165,7 @@ contentful-entry-tagger-service:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-contentful-entry-tagger'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1251,6 +1261,7 @@ download-service:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/download-service'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1353,6 +1364,7 @@ endorsement-system-api:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-endorsements-api'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -1441,6 +1453,7 @@ external-contracts-tests:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/external-contracts-tests'
+    tag: 'latest'
   namespace: 'external-contracts-tests'
   podDisruptionBudget:
     maxUnavailable: 1
@@ -1496,6 +1509,7 @@ github-actions-cache:
         min: 3
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/github-actions-cache'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1577,6 +1591,7 @@ icelandic-names-registry-backend:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/icelandic-names-registry-backend'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -1662,6 +1677,7 @@ island-ui-storybook:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/island-ui-storybook'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1735,6 +1751,7 @@ license-api:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/license-api'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1846,6 +1863,7 @@ portals-admin:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/portals-admin'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -1924,6 +1942,7 @@ regulations-admin-backend:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/regulations-admin-backend'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -2011,6 +2030,7 @@ search-indexer-service:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-search-indexer'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -2142,6 +2162,7 @@ service-portal:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/service-portal'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -2230,6 +2251,7 @@ service-portal-api:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-user-profile'
+    tag: 'latest'
   ingress:
     internal-alb:
       annotations:
@@ -2348,6 +2370,7 @@ services-bff-portals-admin:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-bff'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -2434,6 +2457,7 @@ services-bff-portals-my-pages:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-bff'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -2509,6 +2533,7 @@ services-documents:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-documents'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -2588,6 +2613,7 @@ services-form-system-api:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-form-system-api'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -2692,6 +2718,7 @@ services-sessions:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-sessions'
+    tag: 'latest'
   ingress:
     internal-alb:
       annotations:
@@ -2762,6 +2789,7 @@ services-sessions-cleanup:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-sessions'
+    tag: 'latest'
   namespace: 'services-sessions'
   podDisruptionBudget:
     maxUnavailable: 1
@@ -2828,6 +2856,7 @@ services-sessions-worker:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-sessions'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -2934,6 +2963,7 @@ services-university-gateway:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-university-gateway'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -3064,6 +3094,7 @@ services-university-gateway-worker:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-university-gateway'
+    tag: 'latest'
   namespace: 'services-university-gateway'
   podDisruptionBudget:
     maxUnavailable: 1
@@ -3124,6 +3155,7 @@ skilavottord-web:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/skilavottord-web'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -3193,6 +3225,7 @@ skilavottord-ws:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/skilavottord-ws'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -3283,6 +3316,7 @@ unicorn-app:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/unicorn-app'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -3382,6 +3416,7 @@ user-notification:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-user-notification'
+    tag: 'latest'
   ingress:
     internal-alb:
       annotations:
@@ -3476,6 +3511,7 @@ user-notification-cleanup-worker:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-user-notification'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -3594,6 +3630,7 @@ user-notification-worker:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-user-notification'
+    tag: 'latest'
   initContainer:
     containers:
       - args:
@@ -3689,6 +3726,7 @@ web:
         min: 2
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/web'
+    tag: 'latest'
   ingress:
     primary-alb:
       annotations:
@@ -3760,6 +3798,7 @@ xroad-collector:
         min: 1
   image:
     repository: '821090935708.dkr.ecr.eu-west-1.amazonaws.com/services-xroad-collector'
+    tag: 'latest'
   namespace: 'xroad-collector'
   podDisruptionBudget:
     maxUnavailable: 1
