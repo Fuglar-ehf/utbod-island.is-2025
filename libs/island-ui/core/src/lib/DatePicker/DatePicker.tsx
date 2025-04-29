@@ -4,7 +4,7 @@ import cn from 'classnames'
 import {
   default as ReactDatePicker,
   registerLocale,
-  ReactDatePickerProps,
+  DatePickerProps as ReactDatePickerProps,
 } from 'react-datepicker'
 import getYear from 'date-fns/getYear'
 import is from 'date-fns/locale/is'
@@ -134,11 +134,11 @@ export const DatePicker: React.FC<React.PropsWithChildren<DatePickerProps>> = ({
           }}
           onCalendarClose={() => {
             setDatePickerState('closed')
-            handleCloseCalendar && handleCloseCalendar(startDate)
+            handleCloseCalendar && handleCloseCalendar()
           }}
-          onChange={(date: Date) => {
+          onChange={(date) => {
             setStartDate(date)
-            handleChange && handleChange(date)
+            handleChange && date && handleChange(date)
           }}
           startDate={startDate}
           required={required}
