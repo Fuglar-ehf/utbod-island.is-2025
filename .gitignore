@@ -176,3 +176,4 @@ service-account.json
 # testing
 /coverage
 charts/bootstrap
+charts/features
