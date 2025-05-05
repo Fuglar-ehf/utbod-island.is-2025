@@ -7,6 +7,7 @@ export enum InstitutionNationalIds {
   // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   FJARSYSLA_RIKISINS = '5501692829',
   INNHEIMTUMADUR = '5402696029',
+
   PERSONUVERND = '5608002820',
   RIKISENDURSKODUN = '5402691819',
   RIKISLOGREGLUSTJORI = '5306972079',

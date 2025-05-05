@@ -5,6 +5,7 @@ export enum ApplicationTypes {
   EXAMPLE_NO_INPUTS = 'ExampleNoInputs',
   EXAMPLE_PAYMENT = 'ExamplePayment',
   EXAMPLE_STATE_TRANSFERS = 'ExampleStateTransfers',
+  TAX_RETURN = 'TaxReturn',
   PASSPORT = 'Passport',
   PASSPORT_ANNULMENT = 'PassportAnnulment',
   DRIVING_LEARNERS_PERMIT = 'DrivingLearnersPermit',

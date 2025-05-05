@@ -1,3 +1,5 @@
+import { TaxReturnModule } from './tax-return/tax-return.module'
+import { TaxReturnService } from './tax-return/tax-return.service'
 import { ReferenceTemplateModule } from './reference-template/reference-template.module'
 import { ReferenceTemplateService } from './reference-template/reference-template.service'
 import { ExamplePaymentActionsModule } from './example-payment-actions/examplePaymentActions.module'
@@ -237,6 +239,7 @@ export const modules = [
   SeminarsTemplateModule,
   SecondarySchoolModule,
   TrainingLicenseOnAWorkMachineTemplateModule,
+  TaxReturnModule,
 ]
 
 export const services = [
@@ -318,4 +321,5 @@ export const services = [
   MunicipalListSigningService,
   SecondarySchoolService,
   TrainingLicenseOnAWorkMachineTemplateService,
+  TaxReturnService,
 ]
