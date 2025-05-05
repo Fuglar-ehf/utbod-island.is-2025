@@ -89,6 +89,10 @@ export enum ApplicationTypes {
 }
 
 export const ApplicationConfigurations = {
+  [ApplicationTypes.TAX_RETURN]: {
+    slug: 'tax-return',
+    translation: 'tax-return.application',
+  },
   [ApplicationTypes.EXAMPLE]: {
     slug: 'example',
     translation: 'example.application',
