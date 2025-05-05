@@ -39965,6 +39965,7 @@ __metadata:
     xml2js: "npm:0.4.23"
     xstate: "npm:4.20.0"
     yargs: "npm:17.7.2"
+    yarn: "npm:^1.22.22"
     zod: "npm:3.22.4"
     zod-form-data: "npm:2.0.2"
   languageName: unknown
@@ -59760,6 +59761,16 @@ __metadata:
     y18n: "npm:^4.0.0"
     yargs-parser: "npm:^13.1.2"
   checksum: 10/608ba2e62ac2c7c4572b9c6f7a2d3ef76e2deaad8c8082788ed29ae3ef33e9f68e087f07eb804ed5641de2bc4eab977405d3833b1d11ae8dbbaf5847584d96be
+  languageName: node
+  linkType: hard
+
+"yarn@npm:^1.22.22":
+  version: 1.22.22
+  resolution: "yarn@npm:1.22.22"
+  bin:
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: 10/98d80230beaa81f186b2256dff5ef9dce2dd6073c94299209f8e562da9018cff4275c95c27c788aaa4a9c3c186ea8a9aee9a5b83570696a4c8a9d1fff2d4da3a
   languageName: node
   linkType: hard
 
