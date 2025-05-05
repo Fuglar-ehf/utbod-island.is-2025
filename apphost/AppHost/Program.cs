@@ -13,18 +13,29 @@ var userProfileDb = builder.AddDatabase("services-user-profile");
 var userProfile = builder.AddNodeService("services-user-profile", secrets);
 
 var api = builder.AddNodeService("api", secrets)
-  /*.WaitFor(userProfile)*/;
+  .WaitFor(userProfile);
 
 var bff = builder.AddNodeService("services-bff", secrets)
   .WaitFor(redis);
+
+var applicationSystemDb = builder.AddDatabase("application-system-api");
+var applicationSystemApi = builder.AddNodeService("application-system-api", secrets);
 
 var myPages = builder.AddResource(new NodeAppResource("service-portal", "yarn", "."))
     .WithEnvironment("NODE_TLS_REJECT_UNAUTHORIZED", "0")
     .WithHttpEndpoint(targetPort: 4200, isProxied: false)
     .WithArgs(["start", "service-portal"]);
 
+var applicationSystem = builder.AddResource(new NodeAppResource("application-system-form", "yarn", "."))
+    .WithEnvironment("NODE_TLS_REJECT_UNAUTHORIZED", "0")
+    .WithHttpEndpoint(targetPort: 4242, isProxied: false)
+    .WithArgs(["start", "application-system-form"]);
+
 myPages
   .WaitFor(api)
   .WaitFor(bff);
+
+applicationSystem
+  .WaitFor(myPages);
 
 builder.Build().Run();
