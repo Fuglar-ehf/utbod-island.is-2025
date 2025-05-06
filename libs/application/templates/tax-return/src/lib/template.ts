@@ -24,11 +24,11 @@ const template: ApplicationTemplate<
   ApplicationStateSchema<Events>,
   Events
 > = {
-  type: ApplicationTypes.TAX_RETURN, // TODO: Change to the correct type
-  name: 'tax-return template',
-  codeOwner: CodeOwners.NordaApplications, // TODO: Change to the correct code owner
-  institution: 'Stafrænt Ísland', // TODO: Change to the correct institution
-  translationNamespaces: [ApplicationConfigurations.TaxReturn.translation], // TODO: Change to the correct translation namespace
+  type: ApplicationTypes.TAX_RETURN,
+  name: 'Skattframtal',
+  codeOwner: CodeOwners.Fuglar,
+  institution: 'Skatturinn', // TODO: Change to the correct institution
+  translationNamespaces: [ApplicationConfigurations.TaxReturn.translation],
   dataSchema,
   stateMachineConfig: {
     initial: States.PREREQUISITES,
