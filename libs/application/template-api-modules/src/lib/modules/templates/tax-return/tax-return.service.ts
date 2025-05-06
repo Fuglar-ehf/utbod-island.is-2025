@@ -6,7 +6,7 @@ import { NotificationsService } from '../../../notification/notifications.servic
 import { TemplateApiModuleActionProps } from '../../../types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
 import { SharedTemplateApiService } from '../../shared'
-import { TaxReturnData } from './types'
+import { TaxReturnData, UserInfo } from './types'
 
 @Injectable()
 export class TaxReturnService extends BaseTemplateApiService {
@@ -91,6 +91,16 @@ export class TaxReturnService extends BaseTemplateApiService {
       realestates,
       loans,
       benefits,
+    }
+  }
+
+  async getUserInfo({ auth }: TemplateApiModuleActionProps): Promise<UserInfo> {
+    return {
+      nationalId: '1203894569',
+      name: 'Jökull Þórðarson',
+      address: 'Bláfjallagata 12, 105 Reykjavík',
+      email: 'jokull.thordarson@email.is',
+      phoneNumber: '7728391',
     }
   }
 

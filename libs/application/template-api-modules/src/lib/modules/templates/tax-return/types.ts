@@ -46,3 +46,11 @@ export interface Benefit {
   name: string
   typeOfBenefit: string
 }
+
+export interface UserInfo {
+  nationalId: string
+  name: string
+  address: string
+  email: string
+  phoneNumber: string
+}
