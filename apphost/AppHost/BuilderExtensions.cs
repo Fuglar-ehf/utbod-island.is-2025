@@ -20,6 +20,9 @@ namespace AppHost
         case "api":
           healthBaseUrl = "http://localhost:4444";
           break;
+        case "application-system-api":
+          healthBaseUrl = "http://localhost:3333";
+          break;
         default:
           throw new ArgumentException($"Unknown service: {app}");
       }
