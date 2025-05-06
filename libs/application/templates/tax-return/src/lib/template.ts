@@ -30,7 +30,7 @@ const template: ApplicationTemplate<
   type: ApplicationTypes.TAX_RETURN,
   name: 'Skattframtal',
   codeOwner: CodeOwners.Fuglar,
-  institution: 'Skatturinn', // TODO: Change to the correct institution
+  institution: 'Skatturinn',
   translationNamespaces: [ApplicationConfigurations.TaxReturn.translation],
   dataSchema,
   stateMachineConfig: {

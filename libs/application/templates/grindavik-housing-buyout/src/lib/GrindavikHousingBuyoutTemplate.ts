@@ -39,6 +39,8 @@ enum Roles {
   ORGANIZATION = 'organization',
 }
 
+// TODO: USB þetta gæti verið eitthvað
+
 const configuration =
   ApplicationConfigurations[ApplicationTypes.GRINDAVIK_HOUSING_BUYOUT]
 
