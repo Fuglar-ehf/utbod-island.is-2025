@@ -1,24 +1,26 @@
-import {
-  ApplicationTemplate,
-  ApplicationTypes,
-  ApplicationContext,
-  ApplicationRole,
-  ApplicationStateSchema,
-  Application,
-  DefaultEvents,
-  FormModes,
-  UserProfileApi,
-  ApplicationConfigurations,
-} from '@island.is/application/types'
-import { Events, Roles, States } from '../utils/constants'
-import { CodeOwners } from '@island.is/shared/constants'
-import { dataSchema } from './dataSchema'
+import { assign } from 'xstate'
+
 import {
   DefaultStateLifeCycle,
   EphemeralStateLifeCycle,
 } from '@island.is/application/core'
-import { assign } from 'xstate'
-import { IncomeInfoApi } from '../dataProviders'
+import {
+  Application,
+  ApplicationConfigurations,
+  ApplicationContext,
+  ApplicationRole,
+  ApplicationStateSchema,
+  ApplicationTemplate,
+  ApplicationTypes,
+  DefaultEvents,
+  FormModes,
+  UserProfileApi,
+} from '@island.is/application/types'
+import { CodeOwners } from '@island.is/shared/constants'
+
+import { TaxDataApi } from '../dataProviders'
+import { Events, Roles, States } from '../utils/constants'
+import { dataSchema } from './dataSchema'
 
 const template: ApplicationTemplate<
   ApplicationContext,
@@ -52,7 +54,7 @@ const template: ApplicationTemplate<
               ],
               write: 'all',
               read: 'all',
-              api: [IncomeInfoApi],
+              api: [TaxDataApi],
               delete: true,
             },
           ],

@@ -25,8 +25,11 @@ export interface RealestateInfo {
 }
 
 export interface Loan {
+  yearBought: number
   date: Date
-  amount: number
+  principal: number
+  interest: number
+  remaining: number
   address: string
   loanId: string
   // Years
@@ -38,6 +41,7 @@ export interface Loan {
 }
 
 export interface Benefit {
+  from: string
   amount: number
   name: string
   typeOfBenefit: string

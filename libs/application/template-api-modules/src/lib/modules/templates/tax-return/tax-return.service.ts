@@ -6,7 +6,7 @@ import { NotificationsService } from '../../../notification/notifications.servic
 import { TemplateApiModuleActionProps } from '../../../types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
 import { SharedTemplateApiService } from '../../shared'
-import { Income } from './types'
+import { TaxReturnData } from './types'
 
 @Injectable()
 export class TaxReturnService extends BaseTemplateApiService {
@@ -17,21 +17,81 @@ export class TaxReturnService extends BaseTemplateApiService {
     super(ApplicationTypes.TAX_RETURN)
   }
 
-  async getIncomeInfo({
+  async getData({
     auth,
-  }: TemplateApiModuleActionProps): Promise<Income[]> {
-    return [
+  }: TemplateApiModuleActionProps): Promise<TaxReturnData> {
+    const income = [
       {
-        fromNationalId: '1111111111',
-        fromName: 'Norðurljós Software ehf',
-        amount: 9360000,
+        employerNationalId: '1111111111',
+        employer: 'Norðurljós Software ehf',
+        income: 9360000,
       },
       {
-        fromNationalId: '2222222222',
-        fromName: 'Mús & Merki ehf.',
-        amount: 900000,
+        employerNationalId: '2222222222',
+        employer: 'Mús & Merki ehf.',
+        income: 900000,
       },
     ]
+
+    const cars = [
+      { yearBought: 2021, registrationNumber: 'KB-521', amount: 3100000 },
+      { yearBought: 2012, registrationNumber: 'JU-329', amount: 430000 },
+    ]
+
+    const realestates = [
+      {
+        address: 'Bláfjallagata 12',
+        registrationNumber: '210-9876',
+        realastateValue: 52000000,
+      },
+    ]
+
+    const loans = [
+      {
+        yearBought: 2021,
+        date: new Date('2020-01-01'),
+        amount: 20000000,
+        address: 'Bláfjallagata 12',
+        loanId: '56783900123',
+        periodOfLoan: 30,
+        loanProvider: 'Íslandsbanki hf.',
+        loanProviderNationalId: '4910080160',
+        principal: 1360000,
+        interest: 920000,
+        remaining: 28540000,
+      },
+    ]
+
+    const benefits = [
+      {
+        from: '',
+        amount: 120000,
+        name: 'Dagpeningar',
+        typeOfBenefit: 'Ökutækjastyrkur. Dagpeningar. Hlunnindi',
+      },
+      {
+        from: 'Norðurljós Software ehf',
+        amount: 75000,
+        name: 'Íþróttastyrkur',
+        typeOfBenefit:
+          'Lífeyrisgreiðslur. Greiðslur frá Tryggingastofnun. Aðrar bótagreiðslur, styrkir o.fl.',
+      },
+      {
+        from: 'VR',
+        amount: 130000,
+        name: 'Starfsmenntastyrkur',
+        typeOfBenefit:
+          'Lífeyrisgreiðslur. Greiðslur frá Tryggingastofnun. Aðrar bótagreiðslur, styrkir o.fl.',
+      },
+    ]
+
+    return {
+      income,
+      cars,
+      realestates,
+      loans,
+      benefits,
+    }
   }
 
   async createApplication() {
