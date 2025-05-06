@@ -6,8 +6,9 @@ import {
   buildSubmitField,
   coreMessages,
 } from '@island.is/application/core'
-import { DefaultEvents } from '@island.is/application/types'
-import { FormModes, UserProfileApi } from '@island.is/application/types'
+import { DefaultEvents, FormModes } from '@island.is/application/types'
+
+import { IncomeInfoApi } from '../../dataProviders'
 
 export const Prerequisites = buildForm({
   id: 'PrerequisitesDraft',
@@ -23,9 +24,8 @@ export const Prerequisites = buildForm({
           title: 'External data',
           dataProviders: [
             buildDataProviderItem({
-              provider: UserProfileApi,
-              title: 'User profile',
-              subTitle: 'User profile',
+              provider: IncomeInfoApi,
+              title: 'Income information',
             }),
             // Add more data providers as needed
           ],

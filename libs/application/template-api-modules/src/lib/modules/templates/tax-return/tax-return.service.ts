@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common'
-import { SharedTemplateApiService } from '../../shared'
+
 import { ApplicationTypes } from '@island.is/application/types'
+
 import { NotificationsService } from '../../../notification/notifications.service'
+import { TemplateApiModuleActionProps } from '../../../types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
+import { SharedTemplateApiService } from '../../shared'
+import { Income } from './types'
 
 @Injectable()
 export class TaxReturnService extends BaseTemplateApiService {
@@ -12,7 +16,23 @@ export class TaxReturnService extends BaseTemplateApiService {
   ) {
     super(ApplicationTypes.TAX_RETURN)
   }
-  // TODO: Implement functions as needed
+
+  async getIncomeInfo({
+    auth,
+  }: TemplateApiModuleActionProps): Promise<Income[]> {
+    return [
+      {
+        fromNationalId: '1111111111',
+        fromName: 'Norðurljós Software ehf',
+        amount: 9360000,
+      },
+      {
+        fromNationalId: '2222222222',
+        fromName: 'Mús & Merki ehf.',
+        amount: 900000,
+      },
+    ]
+  }
 
   async createApplication() {
     // TODO: Implement this
