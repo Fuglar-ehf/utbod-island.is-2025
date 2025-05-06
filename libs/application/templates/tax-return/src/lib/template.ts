@@ -18,6 +18,7 @@ import {
   EphemeralStateLifeCycle,
 } from '@island.is/application/core'
 import { assign } from 'xstate'
+import { IncomeInfoApi } from '../dataProviders'
 
 const template: ApplicationTemplate<
   ApplicationContext,
@@ -51,7 +52,7 @@ const template: ApplicationTemplate<
               ],
               write: 'all',
               read: 'all',
-              api: [UserProfileApi],
+              api: [IncomeInfoApi],
               delete: true,
             },
           ],

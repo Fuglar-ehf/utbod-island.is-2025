@@ -6,12 +6,12 @@ import {
 } from '@island.is/application/core'
 
 export const firstSection = buildSection({
-  id: 'firstSection',
-  title: 'First section',
+  id: 'section4',
+  title: 'Tekjur ársins 2024',
   children: [
     buildMultiField({
       id: 'firstSection',
-      title: 'First section',
+      title: 'Launagreiðslur',
       children: [
         buildDescriptionField({
           id: 'description',
