@@ -32,7 +32,7 @@ export const realestatesSection = buildSubSection({
               return {
                 id: entry.registrationNumber,
                 address: entry.address,
-                value: entry.realastateValue.toLocaleString(),
+                value: entry.realestateValue.toLocaleString(),
               }
             })
           },

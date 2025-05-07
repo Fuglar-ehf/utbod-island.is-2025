@@ -21,7 +21,7 @@ export interface CarInfo {
 export interface RealestateInfo {
   address: string
   registrationNumber: string
-  realastateValue: number
+  realestateValue: number
 }
 
 export interface Loan {
