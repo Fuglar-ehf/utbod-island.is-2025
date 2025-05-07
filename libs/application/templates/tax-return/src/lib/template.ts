@@ -17,7 +17,7 @@ import {
 } from '@island.is/application/types'
 import { CodeOwners } from '@island.is/shared/constants'
 
-import { TaxDataApi } from '../dataProviders'
+import { TaxDataApi, UserInfoApi } from '../dataProviders'
 import { Events, Roles, States } from '../utils/constants'
 import { dataSchema } from './dataSchema'
 
@@ -54,7 +54,7 @@ const template: ApplicationTemplate<
               ],
               write: 'all',
               read: 'all',
-              api: [TaxDataApi],
+              api: [TaxDataApi, UserInfoApi],
               delete: true,
             },
           ],

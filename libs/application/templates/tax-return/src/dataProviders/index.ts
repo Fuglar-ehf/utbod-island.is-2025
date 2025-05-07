@@ -5,3 +5,9 @@ export const TaxDataApi = defineTemplateApi({
   externalDataId: 'getData',
   namespace: 'TaxReturn',
 })
+
+export const UserInfoApi = defineTemplateApi({
+  action: 'getUserInfo',
+  externalDataId: 'getUserInfo',
+  namespace: 'TaxReturn',
+})

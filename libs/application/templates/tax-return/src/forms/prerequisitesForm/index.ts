@@ -8,7 +8,7 @@ import {
 } from '@island.is/application/core'
 import { DefaultEvents, FormModes } from '@island.is/application/types'
 
-import { TaxDataApi } from '../../dataProviders'
+import { TaxDataApi, UserInfoApi } from '../../dataProviders'
 
 export const Prerequisites = buildForm({
   id: 'PrerequisitesDraft',
@@ -25,7 +25,11 @@ export const Prerequisites = buildForm({
           dataProviders: [
             buildDataProviderItem({
               provider: TaxDataApi,
-              title: 'Income information',
+              title: 'Tax data',
+            }),
+            buildDataProviderItem({
+              provider: UserInfoApi,
+              title: 'User information',
             }),
             // Add more data providers as needed
           ],
