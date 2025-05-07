@@ -4,9 +4,9 @@ namespace AppHost
 {
   internal static class BuilderExtensions
   {
-    public static IResourceBuilder<NodeAppResource> AddNodeService(this IDistributedApplicationBuilder builder, string app, Dictionary<string, string> secrets)
+    public static IResourceBuilder<NodeAppResource> AddNodeService(this IDistributedApplicationBuilder builder, string app, Dictionary<string, string> secrets, string path = ".")
     {
-      var resource = new NodeAppResource(app, "yarn", ".");
+      var resource = new NodeAppResource(app, "yarn", path);
 
       string healthBaseUrl;
       switch (app)
@@ -22,6 +22,9 @@ namespace AppHost
           break;
         case "application-system-api":
           healthBaseUrl = "http://localhost:3333";
+          break;
+        case "national-registry":
+          healthBaseUrl = "http://localhost:3000";
           break;
         default:
           throw new ArgumentException($"Unknown service: {app}");
@@ -41,9 +44,9 @@ namespace AppHost
       return service;
     }
 
-    public static IResourceBuilder<NodeAppResource> AddDatabase(this IDistributedApplicationBuilder builder, string app)
+    public static IResourceBuilder<NodeAppResource> AddDatabase(this IDistributedApplicationBuilder builder, string app, string path = ".")
     {
-      var resource = new NodeAppResource($"start-dev-{app}", "yarn", ".");
+      var resource = new NodeAppResource($"start-dev-{app}", "yarn", path);
 
       return builder.AddResource(resource).WithArgs(["dev-services", app]);
     }
