@@ -17,7 +17,7 @@ import {
 } from '@island.is/application/types'
 import { CodeOwners } from '@island.is/shared/constants'
 
-import { TaxDataApi, UserInfoApi } from '../dataProviders'
+import { TaxDataApi, TaxSubmitApi, UserInfoApi } from '../dataProviders'
 import { Events, Roles, States } from '../utils/constants'
 import { dataSchema } from './dataSchema'
 
@@ -54,7 +54,7 @@ const template: ApplicationTemplate<
               ],
               write: 'all',
               read: 'all',
-              api: [TaxDataApi],
+              api: [TaxDataApi, UserInfoApi],
               delete: true,
             },
           ],
@@ -71,6 +71,7 @@ const template: ApplicationTemplate<
           progress: 0.4,
           status: FormModes.DRAFT,
           lifecycle: DefaultStateLifeCycle,
+          onExit: TaxSubmitApi,
           roles: [
             {
               id: Roles.APPLICANT,
@@ -81,6 +82,7 @@ const template: ApplicationTemplate<
               actions: [
                 { event: 'SUBMIT', name: 'Staðfesta', type: 'primary' },
               ],
+              api: [TaxSubmitApi],
               write: 'all',
               read: 'all',
               delete: true,

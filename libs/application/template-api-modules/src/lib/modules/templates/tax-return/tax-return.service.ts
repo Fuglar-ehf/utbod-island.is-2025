@@ -108,7 +108,7 @@ export class TaxReturnService extends BaseTemplateApiService {
     }
   }
 
-  async submit({ application, auth }: TemplateApiModuleActionProps) {
+  async submitTaxReturn({ application, auth }: TemplateApiModuleActionProps) {
     const data = application.externalData?.getData?.data as TaxReturnData
 
     const dto = {
