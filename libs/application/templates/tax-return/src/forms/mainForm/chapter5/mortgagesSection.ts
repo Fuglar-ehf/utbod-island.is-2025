@@ -12,7 +12,7 @@ export const mortgagesSection = buildSubSection({
   children: [
     buildMultiField({
       id: 'mortgageOverview',
-      title: '',
+      title: 'Vaxtagjöld vegna íbúðarhúsnæðis til eigin nota',
       children: [
         buildTableRepeaterField({
           id: 'mortgageTableRepeater',
@@ -33,37 +33,16 @@ export const mortgagesSection = buildSubSection({
               nationalId: loan.loanProviderNationalId,
               lenderName: loan.loanProvider,
               mortgageNumber: loan.loanId,
-              date: loan.date.toLocaleDateString('is-IS'),
+              // date: loan.date.toString(),
               yearsLeft: loan.periodOfLoan.toString(),
             }))
           },
           fields: {
-            lenderName: {
+            mortgageNumber: {
               component: 'input',
-              label: 'Lánveitandi',
+              label: 'Lánsnúmer',
               width: 'half',
               required: true,
-              type: 'text',
-            },
-            lenderNationalId: {
-              component: 'input',
-              label: 'Kennitala lánveitanda',
-              width: 'half',
-              required: true,
-              type: 'text',
-            },
-            principal: {
-              component: 'input',
-              label: 'Upphæð',
-              width: 'half',
-              required: true,
-              type: 'text',
-            },
-            collateral: {
-              component: 'input',
-              label: 'Trygging',
-              width: 'half',
-              required: false,
               type: 'text',
             },
           },
@@ -71,7 +50,63 @@ export const mortgagesSection = buildSubSection({
             format: {
               input: (value) => `${value}`,
             },
-            header: ['Lánveitandi', 'Kennitala', 'Upphæð', 'Trygging'],
+            header: [
+              'Kaupár',
+              'Kennitala',
+              'Lánveitandi',
+              'Lánsnúmer',
+              //  'Lántökudagur',
+              'Lánstími ár',
+            ],
+          },
+        }),
+        buildStaticTableField({
+          title: 'Upplýsingar um greiðslur',
+          header: [
+            'Heildargreiðslur',
+            'Afborganir á nafnverði',
+            'Vaxtagjöld',
+            'Eftirstöðvar',
+          ],
+          rows: (application) => {
+            const payments =
+              (application.externalData?.getData?.data as TaxReturnData)
+                ?.loans ?? []
+
+            if (!payments.length) return []
+
+            return payments.map((entry) => [
+              entry.yearBought.toString(),
+              entry.principal.toLocaleString('is-IS'),
+              entry.interest.toLocaleString('is-IS'),
+              entry.remaining.toLocaleString('is-IS'),
+            ])
+          },
+          summary: (application) => {
+            const payments =
+              (application.externalData?.getData?.data as TaxReturnData)
+                ?.loans ?? []
+
+            const totalInterest = payments.reduce(
+              (sum, p) => sum + (p.interest || 0),
+              0,
+            )
+
+            const totalRemaining = payments.reduce(
+              (sum, p) => sum + (p.remaining || 0),
+              0,
+            )
+
+            return [
+              {
+                label: 'Samtals vaxtagjöld:',
+                value: `${totalInterest.toLocaleString('is-IS')} kr.`,
+              },
+              {
+                label: 'Samtals eftirstöðvar:',
+                value: `${totalRemaining.toLocaleString('is-IS')} kr.`,
+              },
+            ]
           },
         }),
       ],
