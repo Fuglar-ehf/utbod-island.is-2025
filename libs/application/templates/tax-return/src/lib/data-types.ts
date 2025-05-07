@@ -55,7 +55,8 @@ export interface UserInfo {
   phoneNumber: string
 }
 
-export interface NameValuePair {
+export interface NameIdentifierValuePair {
   name: string
+  identifier: string
   value: string
 }
