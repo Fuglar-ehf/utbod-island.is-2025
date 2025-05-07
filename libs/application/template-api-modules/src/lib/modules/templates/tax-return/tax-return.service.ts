@@ -64,24 +64,22 @@ export class TaxReturnService extends BaseTemplateApiService {
 
     const benefits = [
       {
-        from: '',
+        from: 'Norðurljós Software ehf',
         amount: 120000,
         name: 'Dagpeningar',
-        typeOfBenefit: 'Ökutækjastyrkur. Dagpeningar. Hlunnindi',
+        typeOfBenefit: '2.2',
       },
       {
         from: 'Norðurljós Software ehf',
         amount: 75000,
         name: 'Íþróttastyrkur',
-        typeOfBenefit:
-          'Lífeyrisgreiðslur. Greiðslur frá Tryggingastofnun. Aðrar bótagreiðslur, styrkir o.fl.',
+        typeOfBenefit: '2.3',
       },
       {
         from: 'VR',
         amount: 130000,
         name: 'Starfsmenntastyrkur',
-        typeOfBenefit:
-          'Lífeyrisgreiðslur. Greiðslur frá Tryggingastofnun. Aðrar bótagreiðslur, styrkir o.fl.',
+        typeOfBenefit: '2.3',
       },
     ]
 
