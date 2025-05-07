@@ -13,6 +13,9 @@ var redis = builder.AddContainer("redis", "redis/redis-stack", "latest")
 var skraDb = builder.AddDatabase("national-registry", "../../../utbod-skatturinn-2025");
 var skra = builder.AddNodeService("national-registry", secrets2, "../../../utbod-skatturinn-2025");
 
+var skatturinnDb = builder.AddDatabase("skatturinn-api", "../../../utbod-skatturinn-2025");
+var skatturinn = builder.AddNodeService("skatturinn-api", secrets2, "../../../utbod-skatturinn-2025");
+
 var userProfileDb = builder.AddDatabase("services-user-profile");
 var userProfile = builder.AddNodeService("services-user-profile", secrets);
 
@@ -40,6 +43,8 @@ myPages
   .WaitFor(bff);
 
 applicationSystem
+  //.WaitFor(skra)
+  //.WaitFor(skatturinn)
   .WaitFor(myPages);
 
 builder.Build().Run();

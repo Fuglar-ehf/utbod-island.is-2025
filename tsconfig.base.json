@@ -803,6 +803,7 @@
       "@island.is/clients/signature-collection": [
         "libs/clients/signature-collection/src/index.ts"
       ],
+      "@island.is/clients/skatturinn": ["libs/clients/skatturinn/src/index.ts"],
       "@island.is/clients/smart-solutions-v2": [
         "libs/clients/smart-solutions-v2/src/index.ts"
       ],

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 
 import { ApplicationTypes } from '@island.is/application/types'
 import { NationalRegistryVXClientService } from '@island.is/clients/national-registry-vx'
+import { SkatturinnClientService } from '@island.is/clients/skatturinn'
 
 import { NotificationsService } from '../../../notification/notifications.service'
 import { TemplateApiModuleActionProps } from '../../../types'
@@ -15,6 +16,7 @@ export class TaxReturnService extends BaseTemplateApiService {
     private readonly sharedTemplateAPIService: SharedTemplateApiService,
     private readonly notificationsService: NotificationsService,
     private readonly nationalRegistryService: NationalRegistryVXClientService,
+    private readonly taxReturnService: SkatturinnClientService,
   ) {
     super(ApplicationTypes.TAX_RETURN)
   }
@@ -106,21 +108,49 @@ export class TaxReturnService extends BaseTemplateApiService {
     }
   }
 
-  async createApplication() {
-    // TODO: Implement this
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+  async submit({ application, auth }: TemplateApiModuleActionProps) {
+    const data = application.externalData?.getData?.data as TaxReturnData
 
-    return {
-      id: 1337,
+    const dto = {
+      nationalid: auth.nationalId,
+      year: new Date().getFullYear().toString(), //todo
+      income: data.income.map((i) => ({
+        employerNationalId: i.employerNationalId,
+        employer: i.employer,
+        income: i.income,
+      })),
+      cars: data.cars.map((c) => ({
+        yearBought: c.yearBought,
+        registrationNumber: c.registrationNumber,
+        amount: c.amount,
+      })),
+      realestates: data.realestates.map((r) => ({
+        address: r.address,
+        registrationNumber: r.registrationNumber,
+        realastateValue: r.realastateValue,
+      })),
+      mortgages: data.loans.map((l) => ({
+        yearBought: l.yearBought,
+        date: l.date.toString(), //todo
+        amount: l.principal, //todo
+        address: l.address,
+        loanId: l.loanId,
+        periodOfLoan: l.periodOfLoan,
+        loanProvider: l.loanProvider,
+        loanProviderNationalId: l.loanProviderNationalId,
+        principal: l.principal,
+        interest: l.interest,
+        remaining: l.remaining,
+      })),
+      otherLoans: [],
+      benefits: data.benefits.map((b) => ({
+        from: b.from,
+        amount: b.amount,
+        name: b.name,
+        typeOfBenefit: b.typeOfBenefit,
+      })),
     }
-  }
 
-  async completeApplication() {
-    // TODO: Implement this
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    return {
-      id: 1337,
-    }
+    await this.taxReturnService.submitTaxReturn(auth, dto)
   }
 }

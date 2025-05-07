@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/tax-return-data": {
+      "post": {
+        "operationId": "TaxReturnDataController_createTaxReturnData",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaxReturnDataDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tax return data created successfully."
+          },
+          "400": {
+            "description": "Invalid data provided."
+          }
+        },
+        "summary": "Create a new tax return data entry including income, cars, real estates, mortgages, and benefits",
+        "tags": ["Tax Return Data"]
+      }
+    }
+  },
+  "info": {
+    "title": "Skatturinn API",
+    "description": "API documentation for Skatturinn",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateIncomeDto": {
+        "type": "object",
+        "properties": {
+          "employer_national_id": {
+            "type": "string"
+          },
+          "employer": {
+            "type": "string"
+          },
+          "income": {
+            "type": "number"
+          }
+        },
+        "required": ["employer_national_id", "employer", "income"]
+      },
+      "CreateCarDto": {
+        "type": "object",
+        "properties": {
+          "year_bought": {
+            "type": "number"
+          },
+          "registration_number": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        },
+        "required": ["year_bought", "registration_number", "amount"]
+      },
+      "CreateRealestateDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "registration_number": {
+            "type": "string"
+          },
+          "realastate_value": {
+            "type": "number"
+          }
+        },
+        "required": ["address", "registration_number", "realastate_value"]
+      },
+      "CreateMortgageDto": {
+        "type": "object",
+        "properties": {
+          "year_bought": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "address": {
+            "type": "string"
+          },
+          "loan_id": {
+            "type": "string"
+          },
+          "period_of_loan": {
+            "type": "number"
+          },
+          "loan_provider": {
+            "type": "string"
+          },
+          "loan_provider_national_id": {
+            "type": "string"
+          },
+          "principal": {
+            "type": "number"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "remaining": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "year_bought",
+          "date",
+          "amount",
+          "address",
+          "loan_id",
+          "period_of_loan",
+          "loan_provider",
+          "loan_provider_national_id",
+          "principal",
+          "interest",
+          "remaining"
+        ]
+      },
+      "CreateOtherLoanDto": {
+        "type": "object",
+        "properties": {
+          "loan_description": {
+            "type": "string"
+          },
+          "loan_provider_national_id": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "remaining": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "loan_description",
+          "loan_provider_national_id",
+          "interest",
+          "remaining"
+        ]
+      },
+      "CreateBenefitDto": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type_of_benefit": {
+            "type": "string"
+          }
+        },
+        "required": ["from", "amount", "name", "type_of_benefit"]
+      },
+      "CreateTaxReturnDataDto": {
+        "type": "object",
+        "properties": {
+          "nationalid": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          },
+          "income": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateIncomeDto"
+            }
+          },
+          "cars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCarDto"
+            }
+          },
+          "realestates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateRealestateDto"
+            }
+          },
+          "mortgages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateMortgageDto"
+            }
+          },
+          "otherLoans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateOtherLoanDto"
+            }
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateBenefitDto"
+            }
+          }
+        },
+        "required": [
+          "nationalid",
+          "year",
+          "income",
+          "cars",
+          "realestates",
+          "mortgages",
+          "otherLoans",
+          "benefits"
+        ]
+      }
+    }
+  }
+}
