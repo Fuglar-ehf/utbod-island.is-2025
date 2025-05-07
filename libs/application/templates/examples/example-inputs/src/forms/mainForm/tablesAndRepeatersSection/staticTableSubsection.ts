@@ -6,6 +6,7 @@ import {
 export const staticTableSubsection = buildSubSection({
   id: 'staticTableSubsection',
   title: 'Static table',
+
   children: [
     buildStaticTableField({
       title: 'Static table',

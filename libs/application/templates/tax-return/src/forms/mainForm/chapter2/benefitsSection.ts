@@ -29,14 +29,13 @@ export const benefitsSection = buildSubSection({
           editField: true,
           maxRows: 10,
           getStaticTableData: (_application) => {
-            const income = (
+            const benefits = (
               (_application.externalData?.getData?.data as TaxReturnData)
                 ?.benefits ?? []
             ).filter((item) => item.typeOfBenefit === '2.2')
 
-            return income.map((entry) => {
+            return benefits.map((entry) => {
               return {
-                name: entry.from,
                 description: entry.name,
                 amount: entry.amount.toLocaleString(),
               }
@@ -44,13 +43,7 @@ export const benefitsSection = buildSubSection({
           },
           // Possible fields: input, select, radio, checkbox, date, nationalIdWithName
           fields: {
-            nationalIdWithName: {
-              component: 'nationalIdWithName',
-              label: 'Nafn fyrirtækis',
-              searchCompanies: true,
-              searchPersons: true,
-            },
-            select: {
+            description: {
               component: 'select',
               label: 'Skýring',
               width: 'half',
@@ -60,7 +53,8 @@ export const benefitsSection = buildSubSection({
                 { label: 'Bifreiðahlunnindi', value: 'Bifreiðahlunnindi' },
               ],
             },
-            input: {
+
+            amount: {
               component: 'input',
               label: 'Fjárhæð',
               width: 'half',
@@ -70,14 +64,14 @@ export const benefitsSection = buildSubSection({
           },
           table: {
             // Format values for display in the table
-            format: {
-              nationalIdWithName: (value) => {
-                return `${value}`
-              },
-              input: (value) => `${value}`,
-            },
+            // format: {
+            //   description: (value) => {
+            //     return `${value}`
+            //   },
+            //   amount: (value) => `${value}`,
+            // },
             // Overwrite header for the table. If not provided, the labels from the fields will be used
-            header: ['Nafn fyrirtækis', 'Skýring', 'Fjárhæð'],
+            header: ['Skýring', 'Fjárhæð'],
           },
         }),
       ],

@@ -6,18 +6,18 @@ import {
 } from '@island.is/application/core'
 import { TaxReturnData } from '../../../lib/data-types'
 
-export const carsSection = buildSubSection({
-  id: 'assets',
-  title: 'Bifreiðar og önnur farartæki',
+export const realestatesSection = buildSubSection({
+  id: 'realestatesSection',
+  title: 'Innlendar fasteignir',
   children: [
     buildMultiField({
-      id: 'carOverview',
+      id: 'realestatesSectionRepeter',
       title: '',
       children: [
         buildTableRepeaterField({
           id: 'tableRepeater',
           title: '',
-          addItemButtonText: 'Bæta við bifreið',
+          addItemButtonText: 'Bæta við fasteign',
           saveItemButtonText: 'Vista',
           removeButtonTooltipText: 'Eyða',
           editButtonTooltipText: 'Breyta',
@@ -26,37 +26,37 @@ export const carsSection = buildSubSection({
           getStaticTableData: (_application) => {
             const income =
               (_application.externalData?.getData?.data as TaxReturnData)
-                ?.cars ?? []
+                ?.realestates ?? []
 
             return income.map((entry) => {
               return {
-                licence: entry.registrationNumber,
-                year: entry.yearBought.toString(),
-                amount: entry.amount.toLocaleString(),
+                id: entry.registrationNumber,
+                address: entry.address,
+                value: entry.realastateValue.toLocaleString(),
               }
             })
           },
           // Possible fields: input, select, radio, checkbox, date, nationalIdWithName
           fields: {
-            licence: {
+            id: {
               component: 'input',
-              label: 'Bílnúmer',
+              label: 'Fastanúmer',
               width: 'half',
               required: true,
               type: 'text',
             },
 
-            year: {
+            address: {
               component: 'input',
-              label: 'Kaupár',
+              label: 'Heimilisfang',
               width: 'half',
               required: true,
               type: 'text',
             },
 
-            amount: {
+            value: {
               component: 'input',
-              label: 'Kaupverð',
+              label: 'Fasteignamat',
               width: 'half',
               required: true,
               type: 'text',
@@ -65,13 +65,17 @@ export const carsSection = buildSubSection({
           table: {
             // Format values for display in the table
             format: {
-              nationalIdWithName: (value) => {
+              id: (value) => {
                 return `${value}`
               },
-              input: (value) => `${value}`,
+              address: (value) => `${value}`,
             },
             // Overwrite header for the table. If not provided, the labels from the fields will be used
-            header: ['Nafn launagreiðanda', 'Kennitala', 'Laun'],
+            header: [
+              'Fastanúmer eignar',
+              'Staðsetning eignar',
+              'Fasteignamat ' + (new Date().getFullYear() - 1),
+            ],
           },
         }),
       ],

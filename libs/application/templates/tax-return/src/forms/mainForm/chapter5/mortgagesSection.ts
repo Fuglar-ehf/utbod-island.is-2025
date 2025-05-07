@@ -1,77 +1,77 @@
 import {
-  buildDescriptionField,
   buildMultiField,
+  buildStaticTableField,
   buildSubSection,
   buildTableRepeaterField,
 } from '@island.is/application/core'
 import { TaxReturnData } from '../../../lib/data-types'
 
-export const carsSection = buildSubSection({
-  id: 'assets',
-  title: 'Bifreiðar og önnur farartæki',
+export const mortgagesSection = buildSubSection({
+  id: 'mortgagesSection',
+  title: 'Veðskuldir',
   children: [
     buildMultiField({
-      id: 'carOverview',
+      id: 'mortgageOverview',
       title: '',
       children: [
         buildTableRepeaterField({
-          id: 'tableRepeater',
+          id: 'mortgageTableRepeater',
           title: '',
-          addItemButtonText: 'Bæta við bifreið',
+          addItemButtonText: 'Bæta við veðskuld',
           saveItemButtonText: 'Vista',
           removeButtonTooltipText: 'Eyða',
           editButtonTooltipText: 'Breyta',
           editField: true,
           maxRows: 10,
           getStaticTableData: (_application) => {
-            const income =
+            const loans =
               (_application.externalData?.getData?.data as TaxReturnData)
-                ?.cars ?? []
+                ?.loans ?? []
 
-            return income.map((entry) => {
-              return {
-                licence: entry.registrationNumber,
-                year: entry.yearBought.toString(),
-                amount: entry.amount.toLocaleString(),
-              }
-            })
+            return loans.map((loan) => ({
+              lenderYear: loan.yearBought.toString(),
+              nationalId: loan.loanProviderNationalId,
+              lenderName: loan.loanProvider,
+              mortgageNumber: loan.loanId,
+              date: loan.date.toLocaleDateString('is-IS'),
+              yearsLeft: loan.periodOfLoan.toString(),
+            }))
           },
-          // Possible fields: input, select, radio, checkbox, date, nationalIdWithName
           fields: {
-            licence: {
+            lenderName: {
               component: 'input',
-              label: 'Bílnúmer',
+              label: 'Lánveitandi',
               width: 'half',
               required: true,
               type: 'text',
             },
-
-            year: {
+            lenderNationalId: {
               component: 'input',
-              label: 'Kaupár',
+              label: 'Kennitala lánveitanda',
               width: 'half',
               required: true,
               type: 'text',
             },
-
-            amount: {
+            principal: {
               component: 'input',
-              label: 'Kaupverð',
+              label: 'Upphæð',
               width: 'half',
               required: true,
+              type: 'text',
+            },
+            collateral: {
+              component: 'input',
+              label: 'Trygging',
+              width: 'half',
+              required: false,
               type: 'text',
             },
           },
           table: {
-            // Format values for display in the table
             format: {
-              nationalIdWithName: (value) => {
-                return `${value}`
-              },
               input: (value) => `${value}`,
             },
-            // Overwrite header for the table. If not provided, the labels from the fields will be used
-            header: ['Nafn launagreiðanda', 'Kennitala', 'Laun'],
+            header: ['Lánveitandi', 'Kennitala', 'Upphæð', 'Trygging'],
           },
         }),
       ],
