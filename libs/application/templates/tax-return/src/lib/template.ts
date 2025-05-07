@@ -14,7 +14,6 @@ import {
   ApplicationTypes,
   DefaultEvents,
   FormModes,
-  UserProfileApi,
 } from '@island.is/application/types'
 import { CodeOwners } from '@island.is/shared/constants'
 
@@ -31,6 +30,7 @@ const template: ApplicationTemplate<
   name: 'Skattframtal',
   codeOwner: CodeOwners.Fuglar,
   institution: 'Skatturinn',
+  allowMultipleApplicationsInDraft: false,
   translationNamespaces: [ApplicationConfigurations.TaxReturn.translation],
   dataSchema,
   stateMachineConfig: {

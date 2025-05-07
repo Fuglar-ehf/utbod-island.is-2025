@@ -8,7 +8,7 @@ import { TaxReturnData } from '../../lib/data-types'
 
 export const secondSection = buildSection({
   id: 'assets',
-  title: 'Eignir ársins ' + new Date().getFullYear(),
+  title: 'Eignir ársins ' + (new Date().getFullYear() - 1),
   children: [
     buildMultiField({
       id: 'carOverview',

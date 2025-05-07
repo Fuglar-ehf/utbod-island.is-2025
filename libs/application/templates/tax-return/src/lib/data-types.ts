@@ -46,3 +46,8 @@ export interface Benefit {
   name: string
   typeOfBenefit: string
 }
+
+export interface NameValuePair {
+  name: string
+  value: string
+}
