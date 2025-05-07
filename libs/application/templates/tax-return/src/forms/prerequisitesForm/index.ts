@@ -27,6 +27,10 @@ export const Prerequisites = buildForm({
               provider: TaxDataApi,
               title: 'Ríkisskattstjóri',
             }),
+            buildDataProviderItem({
+              provider: UserInfoApi,
+              title: 'Þjóðskrá',
+            }),
             // Add more data providers as needed
           ],
           submitField: buildSubmitField({
