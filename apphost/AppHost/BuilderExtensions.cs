@@ -26,6 +26,9 @@ namespace AppHost
         case "national-registry":
           healthBaseUrl = "http://localhost:3000";
           break;
+        case "skatturinn-api":
+          healthBaseUrl = "http://localhost:3001";
+          break;
         default:
           throw new ArgumentException($"Unknown service: {app}");
       }

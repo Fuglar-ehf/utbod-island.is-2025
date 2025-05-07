@@ -558,6 +558,9 @@
       "@island.is/application/templates/social-insurance-administration/pension-supplement": [
         "libs/application/templates/social-insurance-administration/pension-supplement/src/index.ts"
       ],
+      "@island.is/application/templates/tax-return": [
+        "libs/application/templates/tax-return/src/index.ts"
+      ],
       "@island.is/application/templates/transport-authority/anonymity-in-vehicle-registry": [
         "libs/application/templates/transport-authority/anonymity-in-vehicle-registry/src/index.ts"
       ],
@@ -760,6 +763,9 @@
       "@island.is/clients/national-registry-v3-applications": [
         "libs/clients/national-registry/v3-applications/src/index.ts"
       ],
+      "@island.is/clients/national-registry-vx": [
+        "libs/clients/national-registry/vx/src/index.ts"
+      ],
       "@island.is/clients/official-journal-of-iceland": [
         "libs/clients/official-journal-of-iceland/public/src/index.ts"
       ],
@@ -797,6 +803,7 @@
       "@island.is/clients/signature-collection": [
         "libs/clients/signature-collection/src/index.ts"
       ],
+      "@island.is/clients/skatturinn": ["libs/clients/skatturinn/src/index.ts"],
       "@island.is/clients/smart-solutions-v2": [
         "libs/clients/smart-solutions-v2/src/index.ts"
       ],

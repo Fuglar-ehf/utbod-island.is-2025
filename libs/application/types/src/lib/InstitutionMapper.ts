@@ -4,6 +4,11 @@ import { InstitutionContentfulIds } from './InstitutionContentfulIds'
 import { InstitutionNationalIds } from './InstitutionNationalIds'
 
 export const institutionMapper = {
+  [ApplicationTypes.TAX_RETURN]: {
+    nationalId: InstitutionNationalIds.INNHEIMTUMADUR,
+    slug: InstitutionTypes.INNHEIMTUMADUR,
+    contentfulId: InstitutionContentfulIds.INNHEIMTUMADUR,
+  },
   [ApplicationTypes.EXAMPLE]: {
     nationalId: InstitutionNationalIds.STAFRAENT_ISLAND,
     slug: InstitutionTypes.STAFRAENT_ISLAND,

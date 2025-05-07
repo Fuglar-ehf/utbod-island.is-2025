@@ -5,6 +5,7 @@ export enum ApplicationTypes {
   EXAMPLE_NO_INPUTS = 'ExampleNoInputs',
   EXAMPLE_PAYMENT = 'ExamplePayment',
   EXAMPLE_STATE_TRANSFERS = 'ExampleStateTransfers',
+  TAX_RETURN = 'TaxReturn',
   PASSPORT = 'Passport',
   PASSPORT_ANNULMENT = 'PassportAnnulment',
   DRIVING_LEARNERS_PERMIT = 'DrivingLearnersPermit',
@@ -88,6 +89,10 @@ export enum ApplicationTypes {
 }
 
 export const ApplicationConfigurations = {
+  [ApplicationTypes.TAX_RETURN]: {
+    slug: 'skattframtal',
+    translation: 'tax-return.application',
+  },
   [ApplicationTypes.EXAMPLE]: {
     slug: 'example',
     translation: 'example.application',

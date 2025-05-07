@@ -16,7 +16,7 @@ export const NationalRegistryVXClientConfig = defineConfig<
     fetchTimeout: 10000,
     endpoint: env.required(
       'NATIONAL_REGISTRY_X_ENDPOINT',
-      'http://localhost:3000/national-registry',
+      'http://localhost:3030',
     ),
   }),
 })

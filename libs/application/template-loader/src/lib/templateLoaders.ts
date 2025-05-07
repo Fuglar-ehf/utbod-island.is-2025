@@ -1,6 +1,8 @@
 import { ApplicationTypes } from '@island.is/application/types'
 
 const templates: Record<ApplicationTypes, () => Promise<unknown>> = {
+  [ApplicationTypes.TAX_RETURN]: () =>
+    import('@island.is/application/templates/tax-return'),
   [ApplicationTypes.EXAMPLE]: () =>
     import('@island.is/application/templates/reference-template'),
   [ApplicationTypes.EXAMPLE_STATE_TRANSFERS]: () =>
