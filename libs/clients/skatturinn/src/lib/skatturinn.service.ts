@@ -15,7 +15,7 @@ export class SkatturinnClientService {
   async submitTaxReturn(auth: Auth, data: CreateTaxReturnDataDto) {
     return await this.taxReturnApiWithAuth(
       auth,
-    ).taxReturnDataControllerCreateTaxReturnData({
+    ).taxReturnDataV1ControllerCreateTaxReturnDataV1({
       createTaxReturnDataDto: data,
     })
   }
