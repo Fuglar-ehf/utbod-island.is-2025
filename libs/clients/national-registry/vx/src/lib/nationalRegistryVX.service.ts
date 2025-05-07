@@ -15,7 +15,7 @@ export class NationalRegistryVXClientService {
   async getPerson(auth: User): Promise<Person> {
     return await this.peopleApiWithAuth(
       auth,
-    ).nationalRegistryControllerGetByNationalId({
+    ).nationalRegistryV1ControllerGetByNationalIdV1({
       nationalId: auth.nationalId,
     })
   }

@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/tax-return-data": {
+    "/api/v1/tax-return-data": {
       "post": {
-        "operationId": "TaxReturnDataController_createTaxReturnData",
+        "operationId": "TaxReturnDataV1Controller_createTaxReturnData_v1",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -24,7 +24,9 @@
           }
         },
         "summary": "Create a new tax return data entry including income, cars, real estates, mortgages, and benefits",
-        "tags": ["Tax Return Data"]
+        "tags": [
+          "Tax Return Data"
+        ]
       }
     }
   },
@@ -51,7 +53,11 @@
             "type": "number"
           }
         },
-        "required": ["employer_national_id", "employer", "income"]
+        "required": [
+          "employer_national_id",
+          "employer",
+          "income"
+        ]
       },
       "CreateCarDto": {
         "type": "object",
@@ -66,7 +72,11 @@
             "type": "number"
           }
         },
-        "required": ["year_bought", "registration_number", "amount"]
+        "required": [
+          "year_bought",
+          "registration_number",
+          "amount"
+        ]
       },
       "CreateRealestateDto": {
         "type": "object",
@@ -81,7 +91,11 @@
             "type": "number"
           }
         },
-        "required": ["address", "registration_number", "realastate_value"]
+        "required": [
+          "address",
+          "registration_number",
+          "realastate_value"
+        ]
       },
       "CreateMortgageDto": {
         "type": "object",
@@ -157,23 +171,43 @@
           "remaining"
         ]
       },
+      "CreateAllowanceDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "type_of_allowance": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "type_of_allowance"
+        ]
+      },
       "CreateBenefitDto": {
         "type": "object",
         "properties": {
-          "from": {
+          "payer_national_id": {
+            "type": "string"
+          },
+          "payer_name": {
             "type": "string"
           },
           "amount": {
             "type": "number"
           },
-          "name": {
-            "type": "string"
-          },
           "type_of_benefit": {
             "type": "string"
           }
         },
-        "required": ["from", "amount", "name", "type_of_benefit"]
+        "required": [
+          "payer_national_id",
+          "payer_name",
+          "amount",
+          "type_of_benefit"
+        ]
       },
       "CreateTaxReturnDataDto": {
         "type": "object",
@@ -214,6 +248,12 @@
               "$ref": "#/components/schemas/CreateOtherLoanDto"
             }
           },
+          "allowances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateAllowanceDto"
+            }
+          },
           "benefits": {
             "type": "array",
             "items": {
@@ -229,6 +269,7 @@
           "realestates",
           "mortgages",
           "otherLoans",
+          "allowances",
           "benefits"
         ]
       }

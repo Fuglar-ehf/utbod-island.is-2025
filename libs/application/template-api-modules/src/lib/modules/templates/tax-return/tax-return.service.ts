@@ -143,10 +143,11 @@ export class TaxReturnService extends BaseTemplateApiService {
         remaining: l.remaining,
       })),
       otherLoans: [],
+      allowances: [],
       benefits: data.benefits.map((b) => ({
-        from: b.from,
+        payerNationalId: b.from,
+        payerName: b.name,
         amount: b.amount,
-        name: b.name,
         typeOfBenefit: b.typeOfBenefit,
       })),
     }
