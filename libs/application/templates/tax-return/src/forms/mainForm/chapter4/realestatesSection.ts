@@ -12,7 +12,7 @@ export const realestatesSection = buildSubSection({
   children: [
     buildMultiField({
       id: 'realestatesSectionRepeter',
-      title: '',
+      title: 'Innlendar fasteignir',
       children: [
         buildTableRepeaterField({
           id: 'tableRepeater',

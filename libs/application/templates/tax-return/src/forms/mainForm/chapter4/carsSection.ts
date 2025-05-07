@@ -12,7 +12,7 @@ export const carsSection = buildSubSection({
   children: [
     buildMultiField({
       id: 'carOverview',
-      title: '',
+      title: 'Bifreiðar og önnur farartæki',
       children: [
         buildTableRepeaterField({
           id: 'tableRepeater',
@@ -71,7 +71,7 @@ export const carsSection = buildSubSection({
               input: (value) => `${value}`,
             },
             // Overwrite header for the table. If not provided, the labels from the fields will be used
-            header: ['Nafn launagreiðanda', 'Kennitala', 'Laun'],
+            header: ['Bílnúmer', 'Kaupár', 'Kapuverð'],
           },
         }),
       ],

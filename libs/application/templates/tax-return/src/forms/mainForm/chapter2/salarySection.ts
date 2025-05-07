@@ -56,9 +56,9 @@ export const salarySection = buildSubSection({
             // Format values for display in the table
             format: {
               nationalIdWithName: (value) => {
-                return `${value} - custom format`
+                return `${value}`
               },
-              input: (value) => `${value} - custom format`,
+              input: (value) => `${value}`,
             },
             // Overwrite header for the table. If not provided, the labels from the fields will be used
             header: ['Nafn launagreiðanda', 'Kennitala', 'Laun'],

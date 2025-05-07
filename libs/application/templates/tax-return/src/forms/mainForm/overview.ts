@@ -8,15 +8,15 @@ import { getOverviewItems } from '../../utils/getOverviewItems'
 
 export const overviewSection = buildSection({
   id: 'overviewSection',
-  title: 'Overview',
+  title: 'Yfirlit',
   children: [
     buildMultiField({
       id: 'overviewSection',
-      title: 'Overview',
+      title: 'Yfirlit',
       children: [
         buildOverviewField({
           id: 'overview',
-          title: 'Overview',
+          title: 'Yfirlit',
           description: 'This is an overview, should come from messages.ts',
           backId: 'idToSomeField',
           bottomLine: false,

@@ -21,7 +21,7 @@ export const Prerequisites = buildForm({
       children: [
         buildExternalDataProvider({
           id: 'approveExternalData',
-          title: 'External data',
+          title: 'Gagnaöflun',
           dataProviders: [
             buildDataProviderItem({
               provider: TaxDataApi,

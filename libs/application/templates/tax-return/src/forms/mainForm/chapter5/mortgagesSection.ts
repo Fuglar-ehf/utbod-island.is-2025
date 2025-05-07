@@ -82,6 +82,7 @@ export const mortgagesSection = buildSubSection({
               entry.remaining.toLocaleString('is-IS'),
             ])
           },
+
           summary: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
@@ -92,8 +93,8 @@ export const mortgagesSection = buildSubSection({
               0,
             )
 
-            const totalRemaining = payments.reduce(
-              (sum, p) => sum + (p.remaining || 0),
+            const totalLoan = payments.reduce(
+              (sum, p) => sum + (p.principal || 0),
               0,
             )
 
@@ -104,7 +105,7 @@ export const mortgagesSection = buildSubSection({
               },
               {
                 label: 'Samtals eftirstöðvar:',
-                value: `${totalRemaining.toLocaleString('is-IS')} kr.`,
+                value: `${totalLoan.toLocaleString('is-IS')} kr.`,
               },
             ]
           },

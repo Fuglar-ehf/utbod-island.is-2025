@@ -13,11 +13,11 @@ import { input } from 'libs/island-ui/core/src/lib/Input/Input.mixins'
 
 export const benefitsSection = buildSubSection({
   id: 'benefitsSection',
-  title: 'Ökutækjastyrkur, dagpeningur',
+  title: 'Ökutækjastyrkur, dagpeningar',
   children: [
     buildMultiField({
       id: 'benefitsRepeater',
-      title: 'Ökutækjastyrkur, dagpeningur og hlunnindi',
+      title: 'Ökutækjastyrkur, dagpeningar og hlunnindi',
       children: [
         buildTableRepeaterField({
           id: '',
@@ -48,9 +48,9 @@ export const benefitsSection = buildSubSection({
               label: 'Skýring',
               width: 'half',
               options: [
-                { label: 'Íþróttastyrkur', value: 'Íþróttastyrkur' },
-                { label: 'Námsstyrkur', value: 'Námsstyrkur' },
-                { label: 'Bifreiðahlunnindi', value: 'Bifreiðahlunnindi' },
+                { label: 'Hlunnindi', value: 'Hlunnindi' },
+                { label: 'Ökutækjastyrkur', value: 'Ökutækjastyrkur' },
+                { label: 'Dagpeningar', value: 'Dagpeningar' },
               ],
             },
 

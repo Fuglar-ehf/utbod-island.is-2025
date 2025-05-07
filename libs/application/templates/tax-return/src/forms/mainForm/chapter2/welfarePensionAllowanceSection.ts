@@ -59,7 +59,14 @@ export const welfarePensionAllowanceSection = buildSubSection({
               options: [
                 { label: 'Íþróttastyrkur', value: 'Íþróttastyrkur' },
                 { label: 'Námsstyrkur', value: 'Námsstyrkur' },
-                { label: 'Bifreiðahlunnindi', value: 'Bifreiðahlunnindi' },
+                {
+                  label: 'Greiðsla frá Tryggingastofnun',
+                  value: 'Tryggingastofnun',
+                },
+                {
+                  label: 'Greiðsla frá Lífeyrissjóði',
+                  value: 'Lífeyrissjóður',
+                },
               ],
             },
             input: {
