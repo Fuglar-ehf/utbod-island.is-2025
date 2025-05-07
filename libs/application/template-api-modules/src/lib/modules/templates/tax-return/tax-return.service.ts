@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 
 import { ApplicationTypes } from '@island.is/application/types'
+import { NationalRegistryVXClientService } from '@island.is/clients/national-registry-vx'
 
 import { NotificationsService } from '../../../notification/notifications.service'
 import { TemplateApiModuleActionProps } from '../../../types'
@@ -13,6 +14,7 @@ export class TaxReturnService extends BaseTemplateApiService {
   constructor(
     private readonly sharedTemplateAPIService: SharedTemplateApiService,
     private readonly notificationsService: NotificationsService,
+    private readonly nationalRegistryService: NationalRegistryVXClientService,
   ) {
     super(ApplicationTypes.TAX_RETURN)
   }
@@ -95,10 +97,12 @@ export class TaxReturnService extends BaseTemplateApiService {
   }
 
   async getUserInfo({ auth }: TemplateApiModuleActionProps): Promise<UserInfo> {
+    const person = await this.nationalRegistryService.getPerson(auth)
+
     return {
-      nationalId: '1203894569',
-      name: 'Jökull Þórðarson',
-      address: 'Bláfjallagata 12, 105 Reykjavík',
+      nationalId: person.nationalId,
+      name: person.name,
+      address: person.dativeCaseAddress,
       email: 'jokull.thordarson@email.is',
       phoneNumber: '7728391',
     }

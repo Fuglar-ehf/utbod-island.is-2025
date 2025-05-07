@@ -11,7 +11,6 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory:
-    '<rootDir>/coverage/libs/clients/national-registry/v3-applications',
-  displayName: 'National-registry-v3-applications',
+  coverageDirectory: '<rootDir>/coverage/libs/clients/national-registry/vx',
+  displayName: 'National-registry-vx',
 }

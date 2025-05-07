@@ -1,11 +1,25 @@
 import { Module } from '@nestjs/common'
 
-import { SharedTemplateAPIModule } from '../../shared'
+import {
+  NationalRegistryVXClientConfig,
+  NationalRegistryVXClientModule,
+} from '@island.is/clients/national-registry-vx'
+import { ConfigModule } from '@island.is/nest/config'
 
-import { TaxReturnService } from './tax-return.service'
 import { ApplicationsNotificationsModule } from '../../../notification/notifications.module'
+import { SharedTemplateAPIModule } from '../../shared'
+import { TaxReturnService } from './tax-return.service'
+
 @Module({
-  imports: [SharedTemplateAPIModule, ApplicationsNotificationsModule],
+  imports: [
+    NationalRegistryVXClientModule,
+    SharedTemplateAPIModule,
+    ApplicationsNotificationsModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [NationalRegistryVXClientConfig],
+    }),
+  ],
   providers: [TaxReturnService],
   exports: [TaxReturnService],
 })
