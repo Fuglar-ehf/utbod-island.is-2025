@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/national-registry/people/{national_id}": {
+      "get": {
+        "operationId": "NationalRegistryController_getByNationalId",
+        "parameters": [
+          {
+            "name": "national_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["People"]
+      }
+    }
+  },
+  "info": {
+    "title": "National Registry API",
+    "description": "API for National Registry service",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "national_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "nominative_case_address": {
+            "type": "string"
+          },
+          "dative_case_address": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "birth_date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "family_id": {
+            "type": "string"
+          },
+          "marital_status": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "national_id",
+          "name",
+          "nominative_case_address",
+          "dative_case_address",
+          "postal_code",
+          "gender",
+          "birth_date",
+          "family_id",
+          "marital_status",
+          "nationality"
+        ]
+      }
+    }
+  }
+}
