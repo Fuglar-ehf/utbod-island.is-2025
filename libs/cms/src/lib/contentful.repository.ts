@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common'
-import {
-  createClient,
-  EntryCollection,
-  Entry,
-  ContentfulClientApi,
-  ClientLogLevel,
-} from 'contentful'
 import Agent, { HttpsAgent } from 'agentkeepalive'
+import {
+  ClientLogLevel,
+  ContentfulClientApi,
+  createClient,
+  Entry,
+  EntryCollection,
+} from 'contentful'
+
 import { logger } from '@island.is/logging'
 import { AGENT_DEFAULTS } from '@island.is/shared/constants'
 
@@ -69,6 +70,7 @@ export class ContentfulRepository {
   }
 
   async getLocales() {
+    return ['is-IS']
     const locales = await this.getClient().getLocales()
     return locales.items.map(({ code, name, fallbackCode }) => ({
       code,
@@ -82,6 +84,18 @@ export class ContentfulRepository {
     query: ContentfulQuery,
     include = 4,
   ): Result<Fields> {
+    return {
+      items: [
+        {
+          fields: {
+            strings: {
+              en: {},
+              'is-IS': {},
+            },
+          },
+        },
+      ],
+    } as unknown as EntryCollection<Fields>
     let code = languageCode ?? 'is-IS'
 
     if (localeMap[code]) {
@@ -100,6 +114,7 @@ export class ContentfulRepository {
     languageCode: undefined | null | string,
     query: ContentfulQuery,
   ): Promise<Entry<Fields>> {
+    return query
     let code = languageCode ?? 'is-IS'
 
     if (localeMap[code]) {

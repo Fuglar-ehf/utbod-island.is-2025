@@ -4,10 +4,14 @@ using DotNetEnv.Extensions;
 var builder = DistributedApplication.CreateBuilder(args);
 
 var secrets = DotNetEnv.Env.NoEnvVars().Load("../../.env.secret").ToDotEnvDictionary();
+var secrets2 = DotNetEnv.Env.NoEnvVars().Load("../../../utbod-skatturinn-2025/.env.secret").ToDotEnvDictionary();
 
 var redis = builder.AddContainer("redis", "redis/redis-stack", "latest")
     .WithHttpEndpoint(6379, 6379, "redis")
     .WithHttpEndpoint(8001, 8001, "redis-browser");
+
+var skraDb = builder.AddDatabase("national-registry", "../../../utbod-skatturinn-2025");
+var skra = builder.AddNodeService("national-registry", secrets2, "../../../utbod-skatturinn-2025");
 
 var userProfileDb = builder.AddDatabase("services-user-profile");
 var userProfile = builder.AddNodeService("services-user-profile", secrets);
