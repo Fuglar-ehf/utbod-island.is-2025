@@ -1,4 +1,5 @@
 import {
+  buildDescriptionField,
   buildMultiField,
   buildStaticTableField,
   buildSubSection,
@@ -14,50 +15,29 @@ export const mortgagesSection = buildSubSection({
       id: 'mortgageOverview',
       title: 'Vaxtagjöld vegna íbúðarhúsnæðis til eigin nota',
       children: [
-        buildTableRepeaterField({
-          id: 'mortgageTableRepeater',
-          title: '',
-          addItemButtonText: 'Bæta við veðskuld',
-          saveItemButtonText: 'Vista',
-          removeButtonTooltipText: 'Eyða',
-          editButtonTooltipText: 'Breyta',
-          editField: true,
-          maxRows: 10,
-          getStaticTableData: (_application) => {
+        buildStaticTableField({
+          title: 'Yfirlit yfir veðskuldir',
+          header: [
+            'Kaupár',
+            'Kennitala',
+            'Lánveitandi',
+            'Lánsnúmer',
+            // 'Lántökudagur',
+            'Lánstími ár',
+          ],
+          rows: (application) => {
             const loans =
-              (_application.externalData?.getData?.data as TaxReturnData)
+              (application.externalData?.getData?.data as TaxReturnData)
                 ?.loans ?? []
 
-            return loans.map((loan) => ({
-              lenderYear: loan.yearBought.toString(),
-              nationalId: loan.loanProviderNationalId,
-              lenderName: loan.loanProvider,
-              mortgageNumber: loan.loanId,
-              // date: loan.date.toString(),
-              yearsLeft: loan.periodOfLoan.toString(),
-            }))
-          },
-          fields: {
-            mortgageNumber: {
-              component: 'input',
-              label: 'Lánsnúmer',
-              width: 'half',
-              required: true,
-              type: 'text',
-            },
-          },
-          table: {
-            format: {
-              input: (value) => `${value}`,
-            },
-            header: [
-              'Kaupár',
-              'Kennitala',
-              'Lánveitandi',
-              'Lánsnúmer',
-              //  'Lántökudagur',
-              'Lánstími ár',
-            ],
+            return loans.map((loan) => [
+              loan.yearBought.toString(),
+              loan.loanProviderNationalId,
+              loan.loanProvider,
+              loan.loanId,
+              // loan.date.toString(),
+              loan.periodOfLoan.toString(),
+            ])
           },
         }),
         buildStaticTableField({
