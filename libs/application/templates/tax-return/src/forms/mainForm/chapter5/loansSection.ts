@@ -2,10 +2,10 @@ import {
   buildMultiField,
   buildStaticTableField,
   buildSubSection,
-  buildTableRepeaterField,
 } from '@island.is/application/core'
 import { TaxReturnData } from '../../../lib/data-types'
 
+// Other loans in DB
 export const loansSection = buildSubSection({
   id: 'loansSection',
   title: 'Aðrar skuldir og vaxtagjöld',
