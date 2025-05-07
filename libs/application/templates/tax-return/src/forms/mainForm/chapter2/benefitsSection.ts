@@ -64,12 +64,12 @@ export const benefitsSection = buildSubSection({
           },
           table: {
             // Format values for display in the table
-            // format: {
-            //   description: (value) => {
-            //     return `${value}`
-            //   },
-            //   amount: (value) => `${value}`,
-            // },
+            format: {
+              description: (value) => {
+                return `${value}`
+              },
+              amount: (value) => `${value}`,
+            },
             // Overwrite header for the table. If not provided, the labels from the fields will be used
             header: ['Skýring', 'Fjárhæð'],
           },

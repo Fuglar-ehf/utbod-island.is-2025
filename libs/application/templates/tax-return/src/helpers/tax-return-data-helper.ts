@@ -17,15 +17,3 @@ export const mapCarsToNameValue = (
     value: c.amount.toLocaleString('is-IS'),
     identifier: '',
   }))
-
-// export class TaxReturnDataHelper {
-//   static getTaxReturnData(
-//     externalData: ExternalData,
-//   ): TaxReturnData | undefined {
-//     const taxReturnData = getValueViaPath<TaxReturnData>(
-//       externalData,
-//       'taxReturn.data',
-//     )
-//     return taxReturnData
-//   }
-// }
