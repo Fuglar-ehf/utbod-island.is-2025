@@ -1,17 +1,18 @@
 import {
+  buildDescriptionField,
   buildMultiField,
   buildSubSection,
   buildTableRepeaterField,
 } from '@island.is/application/core'
 import { TaxReturnData } from '../../../lib/data-types'
 
-export const salarySection = buildSubSection({
-  id: 'incomeSection',
-  title: 'Launatekjur og starfstengdar greiðslur',
+export const carsSection = buildSubSection({
+  id: 'assets',
+  title: 'Eignir ársins ' + (new Date().getFullYear() - 1),
   children: [
     buildMultiField({
-      id: 'salarySection',
-      title: 'Tekjur ársins ' + (new Date().getFullYear() - 1),
+      id: 'carOverview',
+      title: 'Yfirlit yfir bíla',
       children: [
         buildTableRepeaterField({
           id: 'tableRepeater',
@@ -25,28 +26,37 @@ export const salarySection = buildSubSection({
           getStaticTableData: (_application) => {
             const income =
               (_application.externalData?.getData?.data as TaxReturnData)
-                ?.income ?? []
+                ?.cars ?? []
 
             return income.map((entry) => {
               return {
-                name: entry.employer,
-                nrid: entry.employerNationalId,
-                amount: entry.income.toLocaleString(),
+                licence: entry.registrationNumber,
+                year: entry.yearBought.toString(),
+                amount: entry.amount.toLocaleString(),
               }
             })
           },
           // Possible fields: input, select, radio, checkbox, date, nationalIdWithName
           fields: {
-            nationalIdWithName: {
-              component: 'nationalIdWithName',
-              label: 'National ID with name',
-              searchCompanies: true,
-              searchPersons: true,
+            licence: {
+              component: 'input',
+              label: 'Bílnúmer',
+              width: 'half',
+              required: true,
+              type: 'text',
             },
 
-            input: {
+            year: {
               component: 'input',
-              label: 'Laun',
+              label: 'Kaupár',
+              width: 'half',
+              required: true,
+              type: 'text',
+            },
+
+            amount: {
+              component: 'input',
+              label: 'Kaupverð',
               width: 'half',
               required: true,
               type: 'text',

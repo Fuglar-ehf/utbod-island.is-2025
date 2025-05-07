@@ -54,7 +54,7 @@ const template: ApplicationTemplate<
               ],
               write: 'all',
               read: 'all',
-              api: [TaxDataApi, UserInfoApi],
+              api: [TaxDataApi],
               delete: true,
             },
           ],

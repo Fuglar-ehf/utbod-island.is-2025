@@ -25,11 +25,7 @@ export const Prerequisites = buildForm({
           dataProviders: [
             buildDataProviderItem({
               provider: TaxDataApi,
-              title: 'Tax data',
-            }),
-            buildDataProviderItem({
-              provider: UserInfoApi,
-              title: 'User information',
+              title: 'Ríkisskattstjóri',
             }),
             // Add more data providers as needed
           ],
