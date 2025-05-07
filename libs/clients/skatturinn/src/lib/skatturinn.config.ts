@@ -7,16 +7,11 @@ const schema = z.object({
   endpoint: z.string(),
 })
 
-export const NationalRegistryVXClientConfig = defineConfig<
-  z.infer<typeof schema>
->({
-  name: 'NationalRegistryVXClient',
+export const SkatturinnClientConfig = defineConfig<z.infer<typeof schema>>({
+  name: 'SkatturinnClient',
   schema,
   load: (env) => ({
     fetchTimeout: 10000,
-    endpoint: env.required(
-      'NATIONAL_REGISTRY_X_ENDPOINT',
-      'http://localhost:3030',
-    ),
+    endpoint: env.required('SKATTURINN_ENDPOINT', 'http://localhost:3001'),
   }),
 })
