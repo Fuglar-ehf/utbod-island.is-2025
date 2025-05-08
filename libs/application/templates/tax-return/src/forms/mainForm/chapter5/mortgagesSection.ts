@@ -4,6 +4,7 @@ import {
   buildSubSection,
   buildTableRepeaterField,
 } from '@island.is/application/core'
+
 import { TaxReturnData } from '../../../lib/data-types'
 
 export const mortgagesSection = buildSubSection({
@@ -26,7 +27,7 @@ export const mortgagesSection = buildSubSection({
           getStaticTableData: (_application) => {
             const loans =
               (_application.externalData?.getData?.data as TaxReturnData)
-                ?.loans ?? []
+                ?.mortgages ?? []
 
             return loans.map((loan) => ({
               lenderYear: loan.yearBought.toString(),
@@ -71,7 +72,7 @@ export const mortgagesSection = buildSubSection({
           rows: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
-                ?.loans ?? []
+                ?.mortgages ?? []
 
             if (!payments.length) return []
 
@@ -86,7 +87,7 @@ export const mortgagesSection = buildSubSection({
           summary: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
-                ?.loans ?? []
+                ?.mortgages ?? []
 
             const totalInterest = payments.reduce(
               (sum, p) => sum + (p.interest || 0),
