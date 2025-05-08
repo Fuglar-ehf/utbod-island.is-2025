@@ -95,7 +95,7 @@ export class TaxReturnService extends BaseTemplateApiService {
       income,
       cars,
       realestates,
-      loans,
+      mortgages: loans,
       allowances,
       benefits,
     }
@@ -159,7 +159,7 @@ export class TaxReturnService extends BaseTemplateApiService {
         registrationNumber: r.registrationNumber,
         realastateValue: r.realastateValue,
       })),
-      mortgages: externalData.loans.map((l) => ({
+      mortgages: externalData.mortgages.map((l) => ({
         yearBought: l.yearBought,
         date: l.date.toString(), //todo
         amount: l.principal, //todo

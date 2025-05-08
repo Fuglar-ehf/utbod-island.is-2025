@@ -2,7 +2,7 @@ export interface TaxReturnData {
   income: IncomeInfo[]
   cars: CarInfo[]
   realestates: RealestateInfo[]
-  loans: Loan[]
+  mortgages: Mortgage[]
   allowances: Allowance[]
   benefits: Benefit[]
 }
@@ -25,7 +25,7 @@ export interface RealestateInfo {
   realastateValue: number
 }
 
-export interface Loan {
+export interface Mortgage {
   yearBought: number
   date: Date
   principal: number

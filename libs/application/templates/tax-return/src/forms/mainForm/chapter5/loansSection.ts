@@ -3,6 +3,7 @@ import {
   buildStaticTableField,
   buildSubSection,
 } from '@island.is/application/core'
+
 import { TaxReturnData } from '../../../lib/data-types'
 
 // Other loans in DB
@@ -20,7 +21,7 @@ export const loansSection = buildSubSection({
           rows: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
-                ?.loans ?? []
+                ?.mortgages ?? []
 
             if (!payments.length) return []
 
@@ -33,7 +34,7 @@ export const loansSection = buildSubSection({
           summary: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
-                ?.loans ?? []
+                ?.mortgages ?? []
 
             const totalInterest = payments.reduce(
               (sum, p) => sum + (p.interest || 0),
