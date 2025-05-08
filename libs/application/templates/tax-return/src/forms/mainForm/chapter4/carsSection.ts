@@ -4,6 +4,7 @@ import {
   buildSubSection,
   buildTableRepeaterField,
 } from '@island.is/application/core'
+
 import { TaxReturnData } from '../../../lib/data-types'
 
 export const carsSection = buildSubSection({
@@ -15,7 +16,7 @@ export const carsSection = buildSubSection({
       title: 'Bifreiðar og önnur farartæki',
       children: [
         buildTableRepeaterField({
-          id: 'tableRepeater',
+          id: 'carsTableRepeater',
           title: '',
           addItemButtonText: 'Bæta við bifreið',
           saveItemButtonText: 'Vista',
