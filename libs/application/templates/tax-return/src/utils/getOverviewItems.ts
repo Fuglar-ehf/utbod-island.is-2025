@@ -18,6 +18,7 @@ export const getOverviewItems = (
   answers: FormValue,
   externalData: ExternalData,
 ): Array<KeyValueItem> => {
+  // TODO: Setja þetta inn
   // const user = externalData.getUserInfo.data as UserInfo
   const taxData = externalData.getData.data as TaxReturnData
   const extraCars = answers.carsTableRepeater as Array<any>
@@ -25,6 +26,7 @@ export const getOverviewItems = (
   const formatAmount = (n: number) => `${n.toLocaleString('is-IS')} kr.`
 
   return [
+    // TODO: Setja þetta inn
     // Personal information
     // {
     //   title: 'Upplýsingar um þig',
