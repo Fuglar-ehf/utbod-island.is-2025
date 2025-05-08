@@ -17,19 +17,19 @@ export const overviewSection = buildSection({
         buildOverviewField({
           id: 'overview',
           title: 'Yfirlit',
-          description: 'This is an overview, should come from messages.ts',
+          description: 'Yfirlit yfir skattframtal',
           backId: 'idToSomeField',
           bottomLine: false,
           items: getOverviewItems,
         }),
         buildSubmitField({
           id: 'submit',
-          title: 'Submit',
+          title: 'Senda skattframtal',
           refetchApplicationAfterSubmit: true,
           actions: [
             {
               event: 'SUBMIT',
-              name: 'Submit',
+              name: 'Senda skattframtal',
               type: 'primary',
             },
           ],
