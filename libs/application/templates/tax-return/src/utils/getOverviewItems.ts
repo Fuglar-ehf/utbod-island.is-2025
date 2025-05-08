@@ -18,37 +18,35 @@ export const getOverviewItems = (
   answers: FormValue,
   externalData: ExternalData,
 ): Array<KeyValueItem> => {
-  // TODO: Setja þetta inn
-  // const user = externalData.getUserInfo.data as UserInfo
+  const user = externalData.getUserInfo.data as UserInfo
   const taxData = externalData.getData.data as TaxReturnData
   const extraCars = answers.carsTableRepeater as Array<any>
 
   const formatAmount = (n: number) => `${n.toLocaleString('is-IS')} kr.`
 
   return [
-    // TODO: Setja þetta inn
-    // Personal information
-    // {
-    //   title: 'Upplýsingar um þig',
-    //   width: 'full' as const,
-    //   keyText: 'Nafn',
-    //   valueText: user.name,
-    // },
-    // {
-    //   width: 'half' as const,
-    //   keyText: 'Kennitala',
-    //   valueText: user.nationalId,
-    // },
-    // {
-    //   width: 'half' as const,
-    //   keyText: 'Símanúmer',
-    //   valueText: user.phoneNumber,
-    // },
-    // {
-    //   width: 'full' as const,
-    //   keyText: 'Heimilisfang',
-    //   valueText: user.address,
-    // },
+    //Personal information
+    {
+      title: 'Upplýsingar um þig',
+      width: 'full' as const,
+      keyText: 'Nafn',
+      valueText: user.name,
+    },
+    {
+      width: 'half' as const,
+      keyText: 'Kennitala',
+      valueText: user.nationalId,
+    },
+    {
+      width: 'half' as const,
+      keyText: 'Símanúmer',
+      valueText: user.phoneNumber,
+    },
+    {
+      width: 'full' as const,
+      keyText: 'Heimilisfang',
+      valueText: user.address,
+    },
 
     // Income
     ...(taxData.income ?? []).flatMap((item: IncomeInfo) => [
