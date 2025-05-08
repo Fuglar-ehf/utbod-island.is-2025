@@ -3,6 +3,7 @@ import {
   buildSubSection,
   buildTableRepeaterField,
 } from '@island.is/application/core'
+
 import { TaxReturnData } from '../../../lib/data-types'
 
 export const salarySection = buildSubSection({
@@ -14,7 +15,7 @@ export const salarySection = buildSubSection({
       title: 'Tekjur ársins ' + (new Date().getFullYear() - 1),
       children: [
         buildTableRepeaterField({
-          id: 'tableRepeater',
+          id: 'salariesTableRepeater',
           title: '',
           addItemButtonText: 'Bæta við launagreiðanda',
           saveItemButtonText: 'Vista',

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 
+import { getValueViaPath } from '@island.is/application/core'
 import { ApplicationTypes } from '@island.is/application/types'
 import { NationalRegistryVXClientService } from '@island.is/clients/national-registry-vx'
 import { SkatturinnClientService } from '@island.is/clients/skatturinn'
@@ -8,6 +9,7 @@ import { NotificationsService } from '../../../notification/notifications.servic
 import { TemplateApiModuleActionProps } from '../../../types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
 import { SharedTemplateApiService } from '../../shared'
+import { SalaryItem } from './answer-types'
 import { TaxReturnData, UserInfo } from './types'
 
 @Injectable()
@@ -109,27 +111,40 @@ export class TaxReturnService extends BaseTemplateApiService {
   }
 
   async submitTaxReturn({ application, auth }: TemplateApiModuleActionProps) {
-    const data = application.externalData?.getData?.data as TaxReturnData
+    const externalData = application.externalData?.getData
+      ?.data as TaxReturnData
+
+    const externalDataIncome = externalData.income.map((i) => ({
+      employerNationalId: i.employerNationalId,
+      employer: i.employer,
+      income: i.income,
+    }))
+
+    const userInputIncome =
+      getValueViaPath<Array<SalaryItem>>(
+        application.answers,
+        'salariesTableRepeater',
+      )?.map((s) => ({
+        employerNationalId: s.nationalIdWithName.nationalId,
+        employer: s.nationalIdWithName.name,
+        income: parseInt(s.input.replace(/\./g, '').replace(/,/g, '')),
+      })) ?? []
 
     const dto = {
       nationalid: auth.nationalId,
       year: new Date().getFullYear().toString(), //todo
-      income: data.income.map((i) => ({
-        employerNationalId: i.employerNationalId,
-        employer: i.employer,
-        income: i.income,
-      })),
-      cars: data.cars.map((c) => ({
+      income: [...externalDataIncome, ...userInputIncome],
+      cars: externalData.cars.map((c) => ({
         yearBought: c.yearBought,
         registrationNumber: c.registrationNumber,
         amount: c.amount,
       })),
-      realestates: data.realestates.map((r) => ({
+      realestates: externalData.realestates.map((r) => ({
         address: r.address,
         registrationNumber: r.registrationNumber,
         realastateValue: r.realastateValue,
       })),
-      mortgages: data.loans.map((l) => ({
+      mortgages: externalData.loans.map((l) => ({
         yearBought: l.yearBought,
         date: l.date.toString(), //todo
         amount: l.principal, //todo
@@ -144,7 +159,7 @@ export class TaxReturnService extends BaseTemplateApiService {
       })),
       otherLoans: [],
       allowances: [],
-      benefits: data.benefits.map((b) => ({
+      benefits: externalData.benefits.map((b) => ({
         payerNationalId: b.from,
         payerName: b.name,
         amount: b.amount,
