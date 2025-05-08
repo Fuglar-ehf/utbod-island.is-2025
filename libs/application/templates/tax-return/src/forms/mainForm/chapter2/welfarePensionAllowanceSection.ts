@@ -1,15 +1,17 @@
+// import { input } from 'libs/island-ui/core/src/lib/Input/Input.mixins'
+
 import {
   buildCustomField,
   buildDescriptionField,
   buildMultiField,
   buildSection,
-  buildTextField,
-  buildTableRepeaterField,
   buildSubSection,
+  buildTableRepeaterField,
+  buildTextField,
 } from '@island.is/application/core'
-import { TaxReturnData } from '../../../lib/data-types'
+
 import { mapIncomeToNameValue } from '../../../helpers/tax-return-data-helper'
-import { input } from 'libs/island-ui/core/src/lib/Input/Input.mixins'
+import { TaxReturnData } from '../../../lib/data-types'
 
 export const welfarePensionAllowanceSection = buildSubSection({
   id: 'benefitsSection',
@@ -31,10 +33,9 @@ export const welfarePensionAllowanceSection = buildSubSection({
           editField: true,
           maxRows: 10,
           getStaticTableData: (_application) => {
-            const income = (
+            const income =
               (_application.externalData?.getData?.data as TaxReturnData)
                 ?.benefits ?? []
-            ).filter((item) => item.typeOfBenefit === '2.3')
 
             return income.map((entry) => {
               return {

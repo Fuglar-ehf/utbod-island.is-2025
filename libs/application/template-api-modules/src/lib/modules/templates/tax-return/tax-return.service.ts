@@ -71,12 +71,6 @@ export class TaxReturnService extends BaseTemplateApiService {
     const benefits = [
       {
         from: 'Norðurljós Software ehf',
-        amount: 120000,
-        name: 'Dagpeningar',
-        typeOfBenefit: '2.2',
-      },
-      {
-        from: 'Norðurljós Software ehf',
         amount: 75000,
         name: 'Íþróttastyrkur',
         typeOfBenefit: '2.3',
@@ -89,11 +83,20 @@ export class TaxReturnService extends BaseTemplateApiService {
       },
     ]
 
+    const allowances = [
+      {
+        from: 'Norðurljós Software ehf',
+        amount: 120000,
+        name: 'Dagpeningar',
+        typeOfBenefit: '2.2',
+      },
+    ]
     return {
       income,
       cars,
       realestates,
       loans,
+      allowances,
       benefits,
     }
   }
@@ -158,12 +161,15 @@ export class TaxReturnService extends BaseTemplateApiService {
         remaining: l.remaining,
       })),
       otherLoans: [],
-      allowances: [],
+      allowances: externalData.allowances.map((b) => ({
+        amount: b.amount,
+        typeOfAllowance: '',
+      })),
       benefits: externalData.benefits.map((b) => ({
         payerNationalId: b.from,
         payerName: b.name,
         amount: b.amount,
-        typeOfBenefit: b.typeOfBenefit,
+        typeOfBenefit: '',
       })),
     }
 
