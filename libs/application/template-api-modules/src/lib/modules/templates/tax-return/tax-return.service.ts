@@ -52,7 +52,7 @@ export class TaxReturnService extends BaseTemplateApiService {
       },
     ]
 
-    const loans = [
+    const mortgages = [
       {
         yearBought: 2021,
         date: new Date('2020-01-01'),
@@ -65,6 +65,34 @@ export class TaxReturnService extends BaseTemplateApiService {
         principal: 1360000,
         interest: 920000,
         remaining: 28540000,
+      },
+    ]
+
+    const otherLoans = [
+      {
+        description: 'Eftirstöðvar á korti númer: 4469 88XX XXXX 4567',
+        interest: 39200,
+        remaining: 217000,
+      },
+      {
+        description: 'Aukalán',
+        interest: 86000,
+        remaining: 980000,
+      },
+      {
+        description: '0142-26-732645 Varðan',
+        interest: 14500,
+        remaining: 62000,
+      },
+      {
+        description: 'Kílómetragjald, Skatturinn',
+        interest: 0,
+        remaining: 2370,
+      },
+      {
+        description: 'Þing- og sveitarsjóðsgjöld, Skatturinn',
+        interest: 224,
+        remaining: 0,
       },
     ]
 
@@ -95,7 +123,8 @@ export class TaxReturnService extends BaseTemplateApiService {
       income,
       cars,
       realestates,
-      mortgages: loans,
+      mortgages,
+      otherLoans,
       allowances,
       benefits,
     }
@@ -172,7 +201,12 @@ export class TaxReturnService extends BaseTemplateApiService {
         interest: l.interest,
         remaining: l.remaining,
       })),
-      otherLoans: [],
+      otherLoans: externalData.otherLoans.map((b) => ({
+        loanDescription: b.description,
+        interest: b.interest,
+        remaining: b.remaining,
+        loanProviderNationalId: '',
+      })),
       allowances: externalData.allowances.map((b) => ({
         amount: b.amount,
         typeOfAllowance: '',

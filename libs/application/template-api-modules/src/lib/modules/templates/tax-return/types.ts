@@ -3,6 +3,7 @@ export interface TaxReturnData {
   cars: CarInfo[]
   realestates: RealestateInfo[]
   mortgages: Mortgage[]
+  otherLoans: OtherLoan[]
   allowances: Allowance[]
   benefits: Benefit[]
 }
@@ -39,6 +40,12 @@ export interface Mortgage {
   loanProvider: string
   // National ID of bank
   loanProviderNationalId: string
+}
+
+export interface OtherLoan {
+  description: string
+  interest: number
+  remaining: number
 }
 
 export interface Benefit {

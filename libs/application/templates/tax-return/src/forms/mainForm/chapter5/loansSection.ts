@@ -21,20 +21,20 @@ export const loansSection = buildSubSection({
           rows: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
-                ?.mortgages ?? []
+                ?.otherLoans ?? []
 
             if (!payments.length) return []
 
             return payments.map((entry) => [
-              entry.loanProvider,
-              entry.principal.toLocaleString('is-IS'),
+              entry.description,
               entry.interest.toLocaleString('is-IS'),
+              entry.remaining.toLocaleString('is-IS'),
             ])
           },
           summary: (application) => {
             const payments =
               (application.externalData?.getData?.data as TaxReturnData)
-                ?.mortgages ?? []
+                ?.otherLoans ?? []
 
             const totalInterest = payments.reduce(
               (sum, p) => sum + (p.interest || 0),
