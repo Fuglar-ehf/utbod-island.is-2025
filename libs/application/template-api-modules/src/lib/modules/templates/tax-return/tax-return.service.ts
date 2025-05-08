@@ -9,7 +9,7 @@ import { NotificationsService } from '../../../notification/notifications.servic
 import { TemplateApiModuleActionProps } from '../../../types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
 import { SharedTemplateApiService } from '../../shared'
-import { SalaryItem } from './answer-types'
+import { CarItem, SalaryItem } from './answer-types'
 import { TaxReturnData, UserInfo } from './types'
 
 @Injectable()
@@ -133,15 +133,27 @@ export class TaxReturnService extends BaseTemplateApiService {
         income: parseInt(s.input.replace(/\./g, '').replace(/,/g, '')),
       })) ?? []
 
+    const externalDataCars = externalData.cars.map((c) => ({
+      yearBought: c.yearBought,
+      registrationNumber: c.registrationNumber,
+      amount: c.amount,
+    }))
+
+    const userInputCars =
+      getValueViaPath<Array<CarItem>>(
+        application.answers,
+        'carsTableRepeater',
+      )?.map((s) => ({
+        yearBought: parseInt(s.year, 10),
+        registrationNumber: s.licence,
+        amount: parseInt(s.amount.replace(/\./g, '').replace(/,/g, '')),
+      })) ?? []
+
     const dto = {
       nationalid: auth.nationalId,
       year: new Date().getFullYear().toString(), //todo
       income: [...externalDataIncome, ...userInputIncome],
-      cars: externalData.cars.map((c) => ({
-        yearBought: c.yearBought,
-        registrationNumber: c.registrationNumber,
-        amount: c.amount,
-      })),
+      cars: [...externalDataCars, ...userInputCars],
       realestates: externalData.realestates.map((r) => ({
         address: r.address,
         registrationNumber: r.registrationNumber,
